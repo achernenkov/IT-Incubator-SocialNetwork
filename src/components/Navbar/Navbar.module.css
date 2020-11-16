@@ -1,0 +1,20 @@
+.nav{
+    grid-area: n;
+    background-color:sandybrown;
+    padding: 20px;
+}
+
+.nav a{
+    color:black;
+    text-decoration: none;
+}
+
+.nav a.active{
+    color:gold;
+}
+
+.nav a:hover{
+    color: darkgray;
+}
+
+
