@@ -34,8 +34,19 @@ export type storeType = {
     _addPost: () => void
     _changePostText: (text: string) => void
     getState: () => stateType
-    dispatch: (action: any) => void
+    dispatch: (action: actionsType) => void
 }
+
+type addPostDispatchType = {
+    type: 'ADD-POST'
+}
+
+type changePostTextDispatchType = {
+    type: 'CHANGE-POST-TEXT'
+    text: string
+}
+
+export type actionsType = addPostDispatchType |changePostTextDispatchType
 
 // Create an OOP object
 
@@ -75,7 +86,7 @@ let store = {
     getState() {
         return this._state
     },
-    dispatch(action: any) {
+    dispatch(action: addPostDispatchType |changePostTextDispatchType) {
         if (action.type === 'ADD-POST') {
             this._state.postState.push(
                 {id: 3, text: this._state.postText, like: 45}
