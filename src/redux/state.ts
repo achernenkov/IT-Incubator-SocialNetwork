@@ -1,5 +1,12 @@
 import {RenderingApp} from '../index'
 
+const ADD_POST: string = 'ADD-POST'
+const CHANGE_POST_TEXT: string = 'CHANGE-POST-TEXT'
+
+export const creatorActionAddPost = ():addPostDispatchType => ({type:ADD_POST})
+export const creatorActionChangePostText = (text:string):changePostTextDispatchType => ({type: CHANGE_POST_TEXT, text: text })
+
+
 type dialogMessageType = {
     id: number
     text: string
@@ -38,11 +45,11 @@ export type storeType = {
 }
 
 type addPostDispatchType = {
-    type: 'ADD-POST'
+    type: ADD_POST
 }
 
 type changePostTextDispatchType = {
-    type: 'CHANGE-POST-TEXT'
+    type: CHANGE_POST_TEXT
     text: string
 }
 
@@ -87,13 +94,13 @@ let store = {
         return this._state
     },
     dispatch(action: addPostDispatchType |changePostTextDispatchType) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             this._state.postState.push(
                 {id: 3, text: this._state.postText, like: 45}
             )
             this._state.postText = ''
             RenderingApp()
-        } else if (action.type === 'CHANGE-POST-TEXT') {
+        } else if (action.type === CHANGE_POST_TEXT) {
             this._state.postText = action.text
             RenderingApp()
         }

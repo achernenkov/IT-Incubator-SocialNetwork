@@ -1,5 +1,5 @@
 import React from 'react';
-import {actionsType} from "../../../../redux/state";
+import {actionsType, creatorActionAddPost,creatorActionChangePostText} from "../../../../redux/state";
 
 type publishPostType = {
     textValue: string
@@ -12,12 +12,12 @@ const PublishPost: React.FC<publishPostType> = (props) => {
 
     const changeTextPublishPost = () => {
         if (newPostValue.current) {
-            props.dispatch({type: "CHANGE-POST-TEXT", text: newPostValue.current.value})
+            props.dispatch(creatorActionChangePostText(newPostValue.current.value))
         }
     }
 
     const addPostC = () => {
-        props.dispatch({type: 'ADD-POST'})
+        props.dispatch(creatorActionAddPost())
     }
 
     return (
