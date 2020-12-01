@@ -17,7 +17,7 @@ const PublishPost: React.FC<publishPostType> = (props) => {
     }
 
     const addPostC = () => {
-        props.addPost()
+            props.addPost()
     }
 
     return (

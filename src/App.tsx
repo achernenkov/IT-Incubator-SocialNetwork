@@ -19,15 +19,15 @@ const App: React.FC<AppType> = (propsApp) => {
                 <Navbar/>
                 <div className='content-wrapper'>
                     <Route path='/profile' render={() => <Content
-                        state={propsApp.store.state.postState}
-                        textValue={propsApp.store.state.postText}
+                        state={propsApp.store.getState().postState}
+                        textValue={propsApp.store.getState().postText}
                         changePostText={propsApp.store.changePostText.bind(propsApp.store)}
                         addPost={propsApp.store.addPost.bind(propsApp.store)}
                     />
                     }
                     />
                     <Route path='/dialogs' render={() => <Dialogs
-                        dialogsState={propsApp.store.state.dialogsState}
+                        dialogsState={propsApp.store.getState().dialogsState}
                     />
                     }
                     />

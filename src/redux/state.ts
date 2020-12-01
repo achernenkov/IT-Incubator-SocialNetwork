@@ -30,15 +30,16 @@ export type stateType = {
 // create an OOP object type
 
 export type storeType = {
-    state: stateType
+    _state: stateType
     addPost: () => void
     changePostText: (text: string) => void
+    getState: () => stateType
 }
 
 // Create an OOP object
 
 let store = {
-    state: {
+    _state: {
         dialogsState: {
             dialogsUsers: [
                 {id: 1, name: 'Dmitry'},
@@ -60,15 +61,18 @@ let store = {
         ],
     },
     addPost() {
-        this.state.postState.push(
-            {id: 3, text: this.state.postText , like: 45}
+        this._state.postState.push(
+            {id: 3, text: this._state.postText , like: 45}
         )
-        this.state.postText = ''
+        this._state.postText = ''
         RenderingApp()
     },
     changePostText(text: string) {
-        this.state.postText = text
+        this._state.postText = text
         RenderingApp()
+    },
+    getState(){
+        return this._state
     }
 
 }
