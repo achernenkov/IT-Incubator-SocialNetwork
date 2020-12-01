@@ -7,8 +7,7 @@ import {postStateType} from './../../redux/state'
 type ContentType = {
     state: Array<postStateType>
     textValue: string
-    changePostText: (text: string) => void
-    addPost: () => void
+    dispatch: (action: any) => void
 }
 
 
@@ -19,8 +18,7 @@ const Content: React.FC<ContentType> = (props) => {
             <Microblog
                 state={props.state}
                 textValue={props.textValue}
-                changePostText={props.changePostText}
-                addPost={props.addPost}
+                dispatch={props.dispatch}
             />
         </section>
     )

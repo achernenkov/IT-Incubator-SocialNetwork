@@ -6,8 +6,7 @@ import {postStateType} from './../../../redux/state'
 type microblogType = {
     state: Array<postStateType>
     textValue: string
-    changePostText: (text: string) => void
-    addPost: () => void
+    dispatch: (action: any) => void
 }
 
 const Microblog: React.FC<microblogType> = (props) => {
@@ -16,8 +15,7 @@ const Microblog: React.FC<microblogType> = (props) => {
             My Post
             <PublishPost
                 textValue={props.textValue}
-                changePostText={props.changePostText}
-                addPost={props.addPost}
+                dispatch={props.dispatch}
             />
             <div>
                 Посты

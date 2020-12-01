@@ -21,8 +21,7 @@ const App: React.FC<AppType> = (propsApp) => {
                     <Route path='/profile' render={() => <Content
                         state={propsApp.store.getState().postState}
                         textValue={propsApp.store.getState().postText}
-                        changePostText={propsApp.store.changePostText.bind(propsApp.store)}
-                        addPost={propsApp.store.addPost.bind(propsApp.store)}
+                        dispatch={propsApp.store.dispatch.bind(propsApp.store)}
                     />
                     }
                     />

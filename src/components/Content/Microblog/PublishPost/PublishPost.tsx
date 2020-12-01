@@ -2,8 +2,7 @@ import React from 'react';
 
 type publishPostType = {
     textValue: string
-    changePostText: (text: string) => void
-    addPost: () => void
+    dispatch: (action: any) => void
 }
 
 const PublishPost: React.FC<publishPostType> = (props) => {
@@ -12,12 +11,14 @@ const PublishPost: React.FC<publishPostType> = (props) => {
 
     const changeTextPublishPost = () => {
         if (newPostValue.current) {
-            props.changePostText(newPostValue.current.value)
+            let action = {type: 'CHANGE-POST-TEXT', text: newPostValue.current.value }
+            props.dispatch(action)
         }
     }
 
     const addPostC = () => {
-            props.addPost()
+            let action = {type: 'ADD-POST'}
+            props.dispatch(action)
     }
 
     return (

@@ -31,9 +31,10 @@ export type stateType = {
 
 export type storeType = {
     _state: stateType
-    addPost: () => void
-    changePostText: (text: string) => void
+    _addPost: () => void
+    _changePostText: (text: string) => void
     getState: () => stateType
+    dispatch: (action: any) => void
 }
 
 // Create an OOP object
@@ -60,19 +61,32 @@ let store = {
             {id: 2, text: 'Это мой второй пост через Props', like: 21}
         ],
     },
-    addPost() {
+    _addPost() {
         this._state.postState.push(
-            {id: 3, text: this._state.postText , like: 45}
+            {id: 3, text: this._state.postText, like: 45}
         )
         this._state.postText = ''
         RenderingApp()
     },
-    changePostText(text: string) {
+    _changePostText(text: string) {
         this._state.postText = text
         RenderingApp()
     },
-    getState(){
+    getState() {
         return this._state
+    },
+    dispatch(action: any) {
+        if (action.type === 'ADD-POST') {
+            this._state.postState.push(
+                {id: 3, text: this._state.postText, like: 45}
+            )
+            this._state.postText = ''
+            RenderingApp()
+        } else if (action.type === 'CHANGE-POST-TEXT') {
+            this._state.postText = action.text
+            RenderingApp()
+        }
+
     }
 
 }
