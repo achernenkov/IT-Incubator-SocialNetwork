@@ -1,7 +1,14 @@
 import {RenderingApp} from '../index'
 
+// Post AC
+
 export const creatorActionAddPost = ():addPostDispatchType => ({type:'ADD-POST'})
 export const creatorActionChangePostText = (text:string):changePostTextDispatchType => ({type: 'CHANGE-POST-TEXT', text: text })
+
+// Message AC
+
+export const creatorActionAddMessage = ():addMessageDispatchType => ({type:'ADD-MESSAGE'})
+export const creatorActionChangeMessageText = (text:string):changeMessageDispatchType => ({type: 'CHANGE-MESSAGE-TEXT', text: text })
 
 
 type dialogMessageType = {
@@ -17,6 +24,7 @@ type dialogsUsersType = {
 export type dialogsStateType = {
     dialogMessage: Array<dialogMessageType>
     dialogsUsers: Array<dialogsUsersType>
+    messageText: string
 }
 
 export type postStateType = {
@@ -35,11 +43,12 @@ export type stateType = {
 
 export type storeType = {
     _state: stateType
-    _addPost: () => void
-    _changePostText: (text: string) => void
     getState: () => stateType
     dispatch: (action: actionsType) => void
+    redux_message: (action: actionsMessageType) => void
 }
+
+// Post
 
 type addPostDispatchType = {
     type: 'ADD-POST'
@@ -51,6 +60,19 @@ type changePostTextDispatchType = {
 }
 
 export type actionsType = addPostDispatchType |changePostTextDispatchType
+
+// Message
+
+type addMessageDispatchType = {
+    type: 'ADD-MESSAGE'
+}
+
+type changeMessageDispatchType = {
+    type: 'CHANGE-MESSAGE-TEXT'
+    text: string
+}
+
+export type actionsMessageType = addMessageDispatchType |changeMessageDispatchType
 
 // Create an OOP object
 
@@ -68,7 +90,8 @@ let store = {
             dialogMessage: [
                 {id: 1, text: 'Hello!'},
                 {id: 2, text: 'How are you?'}
-            ]
+            ],
+            messageText: ''
         },
         postText: '',
         postState: [
@@ -76,21 +99,10 @@ let store = {
             {id: 2, text: 'Это мой второй пост через Props', like: 21}
         ],
     },
-    _addPost() {
-        this._state.postState.push(
-            {id: 3, text: this._state.postText, like: 45}
-        )
-        this._state.postText = ''
-        RenderingApp()
-    },
-    _changePostText(text: string) {
-        this._state.postText = text
-        RenderingApp()
-    },
     getState() {
         return this._state
     },
-    dispatch(action: addPostDispatchType |changePostTextDispatchType) {
+    dispatch(action: addPostDispatchType | changePostTextDispatchType) {
         if (action.type === 'ADD-POST') {
             this._state.postState.push(
                 {id: 3, text: this._state.postText, like: 45}
@@ -102,9 +114,22 @@ let store = {
             RenderingApp()
         }
 
-    }
+    },
+    redux_message(action: addMessageDispatchType | changeMessageDispatchType) {
+        if (action.type === 'ADD-MESSAGE') {
+            this._state.dialogsState.dialogMessage.push(
+                {id: 3, text: this._state.dialogsState.messageText}
+            )
+            this._state.dialogsState.messageText = ''
+            RenderingApp()
+        } else if (action.type === 'CHANGE-MESSAGE-TEXT') {
+            this._state.dialogsState.messageText = action.text
+            RenderingApp()
+        }
 
+    }
 }
+
 
 
 export default store;

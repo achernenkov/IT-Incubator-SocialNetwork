@@ -27,6 +27,8 @@ const App: React.FC<AppType> = (propsApp) => {
                     />
                     <Route path='/dialogs' render={() => <Dialogs
                         dialogsState={propsApp.store.getState().dialogsState}
+                        textValueMessage={propsApp.store.getState().dialogsState.messageText}
+                        redux_message={propsApp.store.redux_message.bind(propsApp.store)}
                     />
                     }
                     />
