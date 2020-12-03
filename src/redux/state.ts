@@ -1,6 +1,6 @@
 import {RenderingApp} from '../index'
-import {actionsType} from "./post-reducer";
-import {actionsMessageType} from "./dialogs-reducer";
+import postReducer, {actionsPostType, addPostDispatchType, changePostTextDispatchType} from "./post-reducer";
+import messageReducer, {actionsMessageType, addMessageDispatchType, changeMessageDispatchType} from "./dialogs-reducer";
 
 
 type dialogMessageType = {
@@ -37,11 +37,18 @@ export type stateType = {
 
 // create an OOP object type
 
+export type actionType = any
+    // addPostDispatchType
+    // & changePostTextDispatchType
+    // & addMessageDispatchType
+    // & changeMessageDispatchType
+
+// !!!ВНИМАНИЕ!!!
+
 export type storeType = {
     _state: stateType
     getState: () => stateType
-    dispatch: (action: actionsType) => void
-    redux_message: (action: actionsMessageType) => void
+    dispatch: (action: actionType) => void
 }
 
 
@@ -75,33 +82,14 @@ let store = {
     getState() {
         return this._state
     },
-    dispatch(action: actionsType) {
-        if (action.type === 'ADD-POST') {
-            this._state.postState.postArray.push(
-                {id: 3, text: this._state.postState.postText, like: 45}
-            )
-            this._state.postState.postText = ''
-            RenderingApp()
-        } else if (action.type === 'CHANGE-POST-TEXT') {
-            this._state.postState.postText = action.text
-            RenderingApp()
-        }
-
-    },
-    redux_message(action: actionsMessageType) {
-        if (action.type === 'ADD-MESSAGE') {
-            this._state.dialogsState.dialogMessage.push(
-                {id: 3, text: this._state.dialogsState.messageText}
-            )
-            this._state.dialogsState.messageText = ''
-            RenderingApp()
-        } else if (action.type === 'CHANGE-MESSAGE-TEXT') {
-            this._state.dialogsState.messageText = action.text
-            RenderingApp()
-        }
-
+    dispatch(action: actionType) {
+        postReducer(this.getState().postState, action)
+        messageReducer(this.getState().dialogsState, action)
+        RenderingApp()
     }
 }
+
+
 
 
 export default store;

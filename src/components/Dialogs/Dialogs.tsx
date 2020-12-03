@@ -2,13 +2,13 @@ import React, {FC} from 'react';
 import s from './Dialogs.module.css'
 import UsersDialogs from "./UsersDialogs";
 import MessageDialog from "./MessageDialog";
-import {dialogsStateType} from './../../redux/state'
-import {actionsMessageType, creatorActionAddMessage, creatorActionChangeMessageText} from "../../redux/dialogs-reducer";
+import {actionType, dialogsStateType} from './../../redux/state'
+import {creatorActionAddMessage, creatorActionChangeMessageText} from "../../redux/dialogs-reducer";
 
 type DialogsType = {
     dialogsState: dialogsStateType
     textValueMessage: string
-    redux_message: (action: actionsMessageType) => void
+    dispatch: (action: actionType) => void
 }
 
 const Dialogs: React.FC<DialogsType> = (props) => {
@@ -17,12 +17,12 @@ const Dialogs: React.FC<DialogsType> = (props) => {
 
     const changeMessageText = () => {
         if (newPostValue.current) {
-            props.redux_message(creatorActionChangeMessageText(newPostValue.current.value))
+            props.dispatch(creatorActionChangeMessageText(newPostValue.current.value))
         }
     }
 
     const addMessage = () => {
-        props.redux_message(creatorActionAddMessage())
+        props.dispatch(creatorActionAddMessage())
     }
 
     return (

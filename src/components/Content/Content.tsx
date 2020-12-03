@@ -2,13 +2,12 @@ import React, {FC} from 'react';
 import Microblog from './Microblog/Microblog'
 import Profile from './Profile/Profile'
 import s from './Content.module.css'
-import {postArrayType} from './../../redux/state'
-import {actionsType} from "../../redux/post-reducer";
+import {actionType, postArrayType} from './../../redux/state'
 
 type ContentType = {
     state: Array<postArrayType>
     textValue: string
-    dispatch: (action: actionsType) => void
+    dispatch: (action: actionType) => void
 }
 
 

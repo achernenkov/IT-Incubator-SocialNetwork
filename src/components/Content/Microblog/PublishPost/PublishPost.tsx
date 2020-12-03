@@ -1,10 +1,11 @@
 import React from 'react';
-import {actionsType, creatorActionAddPost, creatorActionChangePostText} from "../../../../redux/post-reducer";
+import {creatorActionAddPost, creatorActionChangePostText} from "../../../../redux/post-reducer";
+import {actionType} from "../../../../redux/state";
 
 
 type publishPostType = {
     textValue: string
-    dispatch: (action: actionsType) => void
+    dispatch: (action: actionType) => void
 }
 
 const PublishPost: React.FC<publishPostType> = (props) => {
