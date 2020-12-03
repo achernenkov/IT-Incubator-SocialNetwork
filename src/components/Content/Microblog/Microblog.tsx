@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import PublishPost from './PublishPost/PublishPost'
 import Post from './Post/Post'
-import {actionsType, postStateType} from './../../../redux/state'
+import {actionsType, postArrayType} from './../../../redux/state'
 
 type microblogType = {
-    state: Array<postStateType>
+    state: Array<postArrayType>
     textValue: string
     dispatch: (action: actionsType) => void
 }

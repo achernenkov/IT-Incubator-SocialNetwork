@@ -2,13 +2,19 @@ import {RenderingApp} from '../index'
 
 // Post AC
 
-export const creatorActionAddPost = ():addPostDispatchType => ({type:'ADD-POST'})
-export const creatorActionChangePostText = (text:string):changePostTextDispatchType => ({type: 'CHANGE-POST-TEXT', text: text })
+export const creatorActionAddPost = (): addPostDispatchType => ({type: 'ADD-POST'})
+export const creatorActionChangePostText = (text: string): changePostTextDispatchType => ({
+    type: 'CHANGE-POST-TEXT',
+    text: text
+})
 
 // Message AC
 
-export const creatorActionAddMessage = ():addMessageDispatchType => ({type:'ADD-MESSAGE'})
-export const creatorActionChangeMessageText = (text:string):changeMessageDispatchType => ({type: 'CHANGE-MESSAGE-TEXT', text: text })
+export const creatorActionAddMessage = (): addMessageDispatchType => ({type: 'ADD-MESSAGE'})
+export const creatorActionChangeMessageText = (text: string): changeMessageDispatchType => ({
+    type: 'CHANGE-MESSAGE-TEXT',
+    text: text
+})
 
 
 type dialogMessageType = {
@@ -22,21 +28,25 @@ type dialogsUsersType = {
 }
 
 export type dialogsStateType = {
-    dialogMessage: Array<dialogMessageType>
     dialogsUsers: Array<dialogsUsersType>
+    dialogMessage: Array<dialogMessageType>
     messageText: string
 }
 
-export type postStateType = {
+export type postArrayType = {
     id: number
     text: string
     like: number
 }
 
+export type postStateType = {
+    postText: string
+    postArray: Array<postArrayType>
+}
+
 export type stateType = {
     dialogsState: dialogsStateType
-    postText: string
-    postState: Array<postStateType>
+    postState: postStateType
 }
 
 // create an OOP object type
@@ -59,7 +69,7 @@ type changePostTextDispatchType = {
     text: string
 }
 
-export type actionsType = addPostDispatchType |changePostTextDispatchType
+export type actionsType = addPostDispatchType | changePostTextDispatchType
 
 // Message
 
@@ -72,7 +82,7 @@ type changeMessageDispatchType = {
     text: string
 }
 
-export type actionsMessageType = addMessageDispatchType |changeMessageDispatchType
+export type actionsMessageType = addMessageDispatchType | changeMessageDispatchType
 
 // Create an OOP object
 
@@ -93,24 +103,26 @@ let store = {
             ],
             messageText: ''
         },
-        postText: '',
-        postState: [
-            {id: 1, text: 'Мой первый пост через Props', like: 41},
-            {id: 2, text: 'Это мой второй пост через Props', like: 21}
-        ],
+        postState: {
+            postText: '',
+            postArray: [
+                {id: 1, text: 'Мой первый пост через Props', like: 41},
+                {id: 2, text: 'Это мой второй пост через Props', like: 21}
+            ]
+        }
     },
     getState() {
         return this._state
     },
     dispatch(action: addPostDispatchType | changePostTextDispatchType) {
         if (action.type === 'ADD-POST') {
-            this._state.postState.push(
-                {id: 3, text: this._state.postText, like: 45}
+            this._state.postState.postArray.push(
+                {id: 3, text: this._state.postState.postText, like: 45}
             )
-            this._state.postText = ''
+            this._state.postState.postText = ''
             RenderingApp()
         } else if (action.type === 'CHANGE-POST-TEXT') {
-            this._state.postText = action.text
+            this._state.postState.postText = action.text
             RenderingApp()
         }
 
@@ -129,7 +141,6 @@ let store = {
 
     }
 }
-
 
 
 export default store;

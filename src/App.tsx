@@ -19,8 +19,8 @@ const App: React.FC<AppType> = (propsApp) => {
                 <Navbar/>
                 <div className='content-wrapper'>
                     <Route path='/profile' render={() => <Content
-                        state={propsApp.store.getState().postState}
-                        textValue={propsApp.store.getState().postText}
+                        state={propsApp.store.getState().postState.postArray}
+                        textValue={propsApp.store.getState().postState.postText}
                         dispatch={propsApp.store.dispatch.bind(propsApp.store)}
                     />
                     }
