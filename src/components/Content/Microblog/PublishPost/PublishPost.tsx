@@ -1,5 +1,6 @@
 import React from 'react';
-import {actionsType, creatorActionAddPost,creatorActionChangePostText} from "../../../../redux/state";
+import {actionsType, creatorActionAddPost, creatorActionChangePostText} from "../../../../redux/post-reducer";
+
 
 type publishPostType = {
     textValue: string

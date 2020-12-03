@@ -1,7 +1,8 @@
 import React, {FC} from 'react';
 import PublishPost from './PublishPost/PublishPost'
 import Post from './Post/Post'
-import {actionsType, postArrayType} from './../../../redux/state'
+import {postArrayType} from './../../../redux/state'
+import {actionsType} from "../../../redux/post-reducer";
 
 type microblogType = {
     state: Array<postArrayType>

@@ -2,11 +2,8 @@ import React, {FC} from 'react';
 import s from './Dialogs.module.css'
 import UsersDialogs from "./UsersDialogs";
 import MessageDialog from "./MessageDialog";
-import {
-    actionsMessageType, creatorActionAddMessage,
-    creatorActionChangeMessageText,
-    dialogsStateType
-} from './../../redux/state'
+import {dialogsStateType} from './../../redux/state'
+import {actionsMessageType, creatorActionAddMessage, creatorActionChangeMessageText} from "../../redux/dialogs-reducer";
 
 type DialogsType = {
     dialogsState: dialogsStateType
