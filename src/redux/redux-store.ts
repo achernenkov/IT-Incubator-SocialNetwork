@@ -6,6 +6,8 @@ const reducers = combineReducers({
     dialogsState: messageReducer,
     postState: postReducer
 })
+
+
 let store = createStore(reducers)
 
 

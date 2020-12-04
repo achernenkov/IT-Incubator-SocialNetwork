@@ -3,13 +3,14 @@ import Microblog from "./Microblog";
 import {creatorActionAddPost, creatorActionChangePostText} from "../../../redux/post-reducer";
 
 type MicroblogContainerType = {
-    store:any
+    store: any
 }
 
 const MicroblogContainer: React.FC<MicroblogContainerType> = (props) => {
 
-    const changeTextPublishPost = (value:string) => {
-            props.store.dispatch(creatorActionChangePostText(value))
+    const changeTextPublishPost = (value: string) => {
+        debugger
+        props.store.dispatch(creatorActionChangePostText(value))
     }
 
     const addPost = () => {

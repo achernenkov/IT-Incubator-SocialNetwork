@@ -1,3 +1,6 @@
+import {addPostDispatchType, changePostTextDispatchType} from "./post-reducer"
+import {addMessageDispatchType, changeMessageDispatchType} from "./dialogs-reducer";
+
 type dialogMessageType = {
     id: number
     text: string
@@ -32,11 +35,11 @@ export type stateType = {
 
 // create an OOP object type
 
-export type actionType = any
-    // addPostDispatchType
-    // & changePostTextDispatchType
-    // & addMessageDispatchType
-    // & changeMessageDispatchType
+export type actionType =
+    addPostDispatchType
+    | changePostTextDispatchType
+    | addMessageDispatchType
+    | changeMessageDispatchType
 
 export type storeType = {
     dialogsState: dialogsStateType
@@ -80,8 +83,6 @@ export type storeType = {
 //         RenderingApp()
 //     }
 // }
-
-
 
 
 // export default store;

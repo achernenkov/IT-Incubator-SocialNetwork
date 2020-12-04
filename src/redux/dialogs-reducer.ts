@@ -1,15 +1,8 @@
 // Type
 
-export type addMessageDispatchType = {
-    type: 'ADD-MESSAGE'
-}
 
-export type changeMessageDispatchType = {
-    type: 'CHANGE-MESSAGE-TEXT'
-    text: string
-}
 
-export type actionsMessageType = addMessageDispatchType | changeMessageDispatchType
+
 
 
 export type dialogMessageType = {
@@ -27,6 +20,18 @@ export type dialogsStateType = {
     dialogMessage: Array<dialogMessageType>
     messageText: string
 }
+
+export type addMessageDispatchType = {
+    type: 'ADD-MESSAGE'
+}
+
+export type changeMessageDispatchType = {
+    type: 'CHANGE-MESSAGE-TEXT'
+    text: string
+}
+
+export type actionsMessageType = addMessageDispatchType | changeMessageDispatchType
+
 
 //
 // Message AC

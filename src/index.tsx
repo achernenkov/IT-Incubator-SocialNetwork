@@ -7,7 +7,7 @@ import store from './redux/redux-store'
 
 console.log(store)
 
-const RenderingApp = (state: any) => {
+const RenderingApp = () => {
     ReactDOM.render(
         <React.StrictMode>
             <App store={store}/>
@@ -17,11 +17,10 @@ const RenderingApp = (state: any) => {
 
 }
 
-RenderingApp(store.getState())
+RenderingApp()
 
 store.subscribe( ()=> {
-    let state = store.getState()
-    RenderingApp(state)
+    RenderingApp()
 })
 
 // If you want your app to work offline and load faster, you can change
