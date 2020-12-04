@@ -1,12 +1,13 @@
 import React, {FC} from 'react';
 import PublishPost from './PublishPost/PublishPost'
 import Post from './Post/Post'
-import {actionType, postArrayType} from './../../../redux/state'
+import {actionType} from './../../../redux/state'
+import {postStateType} from "../../../redux/post-reducer";
 
 type microblogType = {
-    microblogState: Array<postArrayType>
-    textValue: string
-    dispatch: (action: actionType) => void
+    state: postStateType
+    addPost: () => void
+    changeTextPublishPost: (value:string) => void
 }
 
 const Microblog: React.FC<microblogType> = (props) => {
@@ -14,13 +15,14 @@ const Microblog: React.FC<microblogType> = (props) => {
         <div>
             My Post
             <PublishPost
-                textValue={props.textValue}
-                dispatch={props.dispatch}
+                textValue={props.state.postText}
+                addPost={props.addPost}
+                changeTextPublishPost={props.changeTextPublishPost}
             />
             <div>
                 Посты
                 {
-                    props.microblogState.map(post =>
+                    props.state.postArray.map(post =>
                         <Post like={post.like} text={post.text}/>
                     )
                 }

@@ -3,14 +3,11 @@ import './App.css';
 import Header from './components/Header/Header'
 import Navbar from './components/Navbar/Navbar'
 import Content from './components/Content/Content'
-import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from 'react-router-dom';
-import {actionType, stateType} from './redux/state'
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppType = {
-    state: stateType
-    dispatch: (action: actionType) => void
-
+    store:any
 }
 
 const App: React.FC<AppType> = (propsApp) => {
@@ -20,18 +17,11 @@ const App: React.FC<AppType> = (propsApp) => {
                 <Header/>
                 <Navbar/>
                 <div className='content-wrapper'>
-                    <Route path='/profile' render={() => <Content
-                        contentState={propsApp.state.postState.postArray}
-                        textValue={propsApp.state.postState.postText}
-                        dispatch={propsApp.dispatch}
+                    <Route path='/profile' render={() => <Content store={propsApp.store}
                     />
                     }
                     />
-                    <Route path='/dialogs' render={() => <Dialogs
-                        dialogsState={propsApp.state.dialogsState}
-                        textValueMessage={propsApp.state.dialogsState.messageText}
-                        dispatch={propsApp.dispatch}
-                    />
+                    <Route path='/dialogs' render={() => <DialogsContainer store={propsApp.store}/>
                     }
                     />
                 </div>

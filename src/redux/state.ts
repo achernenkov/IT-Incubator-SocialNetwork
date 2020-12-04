@@ -1,8 +1,3 @@
-// import {RenderingApp} from '../index'
-import postReducer, {actionsPostType, addPostDispatchType, changePostTextDispatchType} from "./post-reducer";
-import messageReducer, {actionsMessageType, addMessageDispatchType, changeMessageDispatchType} from "./dialogs-reducer";
-
-
 type dialogMessageType = {
     id: number
     text: string

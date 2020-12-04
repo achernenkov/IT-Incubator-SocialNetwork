@@ -2,13 +2,12 @@ import React, {FC} from 'react';
 import s from './Dialogs.module.css'
 import UsersDialogs from "./UsersDialogs";
 import MessageDialog from "./MessageDialog";
-import {actionType, dialogsStateType} from './../../redux/state'
-import {creatorActionAddMessage, creatorActionChangeMessageText} from "../../redux/dialogs-reducer";
+import {dialogsStateType} from './../../redux/state'
 
 type DialogsType = {
-    dialogsState: dialogsStateType
-    textValueMessage: string
-    dispatch: (action: actionType) => void
+    state: dialogsStateType
+    addMessage: () => void
+    changeMessageText: (value:string) => void
 }
 
 const Dialogs: React.FC<DialogsType> = (props) => {
@@ -17,12 +16,12 @@ const Dialogs: React.FC<DialogsType> = (props) => {
 
     const changeMessageText = () => {
         if (newPostValue.current) {
-            props.dispatch(creatorActionChangeMessageText(newPostValue.current.value))
+            props.changeMessageText(newPostValue.current.value)
         }
     }
 
     const addMessage = () => {
-        props.dispatch(creatorActionAddMessage())
+        props.addMessage()
     }
 
     return (
@@ -30,19 +29,19 @@ const Dialogs: React.FC<DialogsType> = (props) => {
             <div className={s.dialogWrapper}>
                 <div className={s.contact}>
                     {
-                        props.dialogsState.dialogsUsers.map(user =>
+                        props.state.dialogsUsers.map(user =>
                             <UsersDialogs name={user.name} id={user.id}/>
                         )
                     }
                 </div>
                 <div className={s.dialog}>
                     {
-                        props.dialogsState.dialogMessage.map(message =>
+                        props.state.dialogMessage.map(message =>
                             <MessageDialog message={message.text}/>
                         )
                     }
 
-                    <textarea ref={newPostValue} onChange={changeMessageText} value={props.textValueMessage}/>
+                    <textarea ref={newPostValue} onChange={changeMessageText} value={props.state.messageText}/>
                     <br/>
                     <button onClick={addMessage}>Отправить сообщение</button>
                 </div>
