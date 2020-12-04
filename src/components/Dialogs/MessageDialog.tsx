@@ -5,6 +5,8 @@ type MessageDialog = {
 }
 
 // create component message for dialog
-const MessageDialog: React.FC<MessageDialog> = (props) => { return <div> {props.message} </div> }
+const MessageDialog: React.FC<MessageDialog> = (props) => {
+    return <div> {props.message} </div>
+}
 
 export default MessageDialog;

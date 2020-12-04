@@ -36,7 +36,7 @@ export const creatorActionChangePostText = (PostText: string): changePostTextDis
 //
 // Reducer post
 
-const postReducer = (state:postStateType, action:actionsPostType):postStateType => {
+export const postReducer = (state:postStateType, action:actionsPostType):postStateType => {
     switch (action.type){
         case 'ADD-POST':
             state.postArray.push(
