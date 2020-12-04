@@ -43,8 +43,6 @@ export type actionType = any
     // & addMessageDispatchType
     // & changeMessageDispatchType
 
-// !!!ВНИМАНИЕ!!!
-
 export type storeType = {
     dialogsState: dialogsStateType
     postState: postStateType
