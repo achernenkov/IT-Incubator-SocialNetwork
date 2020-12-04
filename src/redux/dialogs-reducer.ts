@@ -38,9 +38,29 @@ export const creatorActionChangeMessageText = (messageText: string): changeMessa
 })
 
 //
+//InitialState
+
+const initialState = {
+    dialogsUsers: [
+        {id: 1, name: 'Dmitry'},
+        {id: 2, name: 'Alexy'},
+        {id: 3, name: 'Mihail'},
+        {id: 4, name: 'Andrey'},
+        {id: 5, name: 'Sergey'},
+        {id: 6, name: 'Vasya'}
+    ],
+    dialogMessage: [
+        {id: 1, text: 'Hello!'},
+        {id: 2, text: 'How are you?'}
+    ],
+    messageText: ''
+}
+
+
+//
 // Reducer message
 
-const messageReducer = (state:dialogsStateType, action:actionsMessageType): dialogsStateType => {
+const messageReducer = (state:dialogsStateType = initialState, action:actionsMessageType): dialogsStateType => {
     switch (action.type){
         case "ADD-MESSAGE":
             state.dialogMessage.push(

@@ -7,3 +7,6 @@ const reducers = combineReducers({
     postState: postReducer
 })
 let store = createStore(reducers)
+
+
+export default store;

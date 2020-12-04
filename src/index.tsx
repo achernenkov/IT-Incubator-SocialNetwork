@@ -3,20 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import store from "./redux/state";
+import store from './redux/redux-store'
 
-export const RenderingApp = () => {
-
+const RenderingApp = (state: any) => {
+    console.log(state)
     ReactDOM.render(
         <React.StrictMode>
-            <App store={store} dispatch={store.dispatch.bind(store)}/>
+            <App store={state} dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
 
 }
 
-RenderingApp()
+RenderingApp(store.getState())
+
+store.subscribe( ()=> {
+    let state = store.getState()
+    RenderingApp(state)
+})
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

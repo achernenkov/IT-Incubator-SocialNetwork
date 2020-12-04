@@ -21,15 +21,15 @@ const App: React.FC<AppType> = (propsApp) => {
                 <Navbar/>
                 <div className='content-wrapper'>
                     <Route path='/profile' render={() => <Content
-                        state={propsApp.store.getState().postState.postArray}
-                        textValue={propsApp.store.getState().postState.postText}
+                        state={propsApp.store.postState.postArray}
+                        textValue={propsApp.store.postState.postText}
                         dispatch={propsApp.dispatch}
                     />
                     }
                     />
                     <Route path='/dialogs' render={() => <Dialogs
-                        dialogsState={propsApp.store.getState().dialogsState}
-                        textValueMessage={propsApp.store.getState().dialogsState.messageText}
+                        dialogsState={propsApp.store.dialogsState}
+                        textValueMessage={propsApp.store.dialogsState.messageText}
                         dispatch={propsApp.dispatch}
                     />
                     }

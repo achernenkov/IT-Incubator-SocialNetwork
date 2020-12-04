@@ -1,4 +1,4 @@
-import {RenderingApp} from '../index'
+// import {RenderingApp} from '../index'
 import postReducer, {actionsPostType, addPostDispatchType, changePostTextDispatchType} from "./post-reducer";
 import messageReducer, {actionsMessageType, addMessageDispatchType, changeMessageDispatchType} from "./dialogs-reducer";
 
@@ -46,50 +46,49 @@ export type actionType = any
 // !!!ВНИМАНИЕ!!!
 
 export type storeType = {
-    _state: stateType
-    getState: () => stateType
-    dispatch: (action: actionType) => void
+    dialogsState: dialogsStateType
+    postState: postStateType
 }
 
 
 // Create an OOP object
 
-let store = {
-    _state: {
-        dialogsState: {
-            dialogsUsers: [
-                {id: 1, name: 'Dmitry'},
-                {id: 2, name: 'Alexy'},
-                {id: 3, name: 'Mihail'},
-                {id: 4, name: 'Andrey'},
-                {id: 5, name: 'Sergey'},
-                {id: 6, name: 'Vasya'}
-            ],
-            dialogMessage: [
-                {id: 1, text: 'Hello!'},
-                {id: 2, text: 'How are you?'}
-            ],
-            messageText: ''
-        },
-        postState: {
-            postText: '',
-            postArray: [
-                {id: 1, text: 'Мой первый пост через Props', like: 41},
-                {id: 2, text: 'Это мой второй пост через Props', like: 21}
-            ]
-        }
-    },
-    getState() {
-        return this._state
-    },
-    dispatch(action: actionType) {
-        postReducer(this.getState().postState, action)
-        messageReducer(this.getState().dialogsState, action)
-        RenderingApp()
-    }
-}
+// let store = {
+//     _state: {
+//         dialogsState: {
+//             dialogsUsers: [
+//                 {id: 1, name: 'Dmitry'},
+//                 {id: 2, name: 'Alexy'},
+//                 {id: 3, name: 'Mihail'},
+//                 {id: 4, name: 'Andrey'},
+//                 {id: 5, name: 'Sergey'},
+//                 {id: 6, name: 'Vasya'}
+//             ],
+//             dialogMessage: [
+//                 {id: 1, text: 'Hello!'},
+//                 {id: 2, text: 'How are you?'}
+//             ],
+//             messageText: ''
+//         },
+//         postState: {
+//             postText: '',
+//             postArray: [
+//                 {id: 1, text: 'Мой первый пост через Props', like: 41},
+//                 {id: 2, text: 'Это мой второй пост через Props', like: 21}
+//             ]
+//         }
+//     },
+//     getState() {
+//         return this._state
+//     },
+//     dispatch(action: actionType) {
+//         postReducer(this.getState().postState, action)
+//         messageReducer(this.getState().dialogsState, action)
+//         RenderingApp()
+//     }
+// }
 
 
 
 
-export default store;
+// export default store;
