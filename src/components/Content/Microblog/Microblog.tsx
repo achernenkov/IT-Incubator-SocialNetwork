@@ -4,7 +4,7 @@ import Post from './Post/Post'
 import {actionType, postArrayType} from './../../../redux/state'
 
 type microblogType = {
-    state: Array<postArrayType>
+    microblogState: Array<postArrayType>
     textValue: string
     dispatch: (action: actionType) => void
 }
@@ -20,7 +20,7 @@ const Microblog: React.FC<microblogType> = (props) => {
             <div>
                 Посты
                 {
-                    props.state.map(post =>
+                    props.microblogState.map(post =>
                         <Post like={post.like} text={post.text}/>
                     )
                 }

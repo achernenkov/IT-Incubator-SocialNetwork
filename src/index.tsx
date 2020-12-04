@@ -9,7 +9,7 @@ const RenderingApp = (state: any) => {
     console.log(state)
     ReactDOM.render(
         <React.StrictMode>
-            <App store={state} dispatch={store.dispatch.bind(store)}/>
+            <App state={state} dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>,
         document.getElementById('root')
     );

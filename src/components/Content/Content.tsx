@@ -5,7 +5,7 @@ import s from './Content.module.css'
 import {actionType, postArrayType} from './../../redux/state'
 
 type ContentType = {
-    state: Array<postArrayType>
+    contentState: Array<postArrayType>
     textValue: string
     dispatch: (action: actionType) => void
 }
@@ -16,7 +16,7 @@ const Content: React.FC<ContentType> = (props) => {
         <section className={s.content}>
             <Profile/>
             <Microblog
-                state={props.state}
+                microblogState={props.contentState}
                 textValue={props.textValue}
                 dispatch={props.dispatch}
             />

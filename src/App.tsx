@@ -5,10 +5,10 @@ import Navbar from './components/Navbar/Navbar'
 import Content from './components/Content/Content'
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from 'react-router-dom';
-import {actionType, storeType} from './redux/state'
+import {actionType, stateType} from './redux/state'
 
 type AppType = {
-    store: storeType
+    state: stateType
     dispatch: (action: actionType) => void
 
 }
@@ -21,15 +21,15 @@ const App: React.FC<AppType> = (propsApp) => {
                 <Navbar/>
                 <div className='content-wrapper'>
                     <Route path='/profile' render={() => <Content
-                        state={propsApp.store.postState.postArray}
-                        textValue={propsApp.store.postState.postText}
+                        contentState={propsApp.state.postState.postArray}
+                        textValue={propsApp.state.postState.postText}
                         dispatch={propsApp.dispatch}
                     />
                     }
                     />
                     <Route path='/dialogs' render={() => <Dialogs
-                        dialogsState={propsApp.store.dialogsState}
-                        textValueMessage={propsApp.store.dialogsState.messageText}
+                        dialogsState={propsApp.state.dialogsState}
+                        textValueMessage={propsApp.state.dialogsState.messageText}
                         dispatch={propsApp.dispatch}
                     />
                     }
