@@ -2,8 +2,9 @@ import React, {FC} from 'react';
 import Microblog from "./Microblog";
 import {creatorActionAddPost, creatorActionChangePostText} from "../../../redux/post-reducer";
 import {connect} from "react-redux";
+import {RootStateType} from "../../../redux/redux-store";
 
-let mapStateToProps = (state:any) => {
+let mapStateToProps = (state:RootStateType) => {
     return {
         state: state.postState
     }
