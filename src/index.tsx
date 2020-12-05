@@ -8,7 +8,6 @@ import {Provider} from "react-redux";
 
 console.log(store)
 
-const RenderingApp = () => {
     ReactDOM.render(
         <React.StrictMode>
             <Provider store={store}>
@@ -16,15 +15,8 @@ const RenderingApp = () => {
             </Provider>
         </React.StrictMode>,
         document.getElementById('root')
-    );
+    )
 
-}
-
-RenderingApp()
-
-store.subscribe(() => {
-    RenderingApp()
-})
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

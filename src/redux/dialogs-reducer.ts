@@ -66,16 +66,19 @@ const initialState = {
 // Reducer message
 
 const messageReducer = (state:dialogsStateType = initialState, action:actionsMessageType): dialogsStateType => {
+    let newState = {...state}
+    newState.dialogMessage = [...state.dialogMessage]
+
     switch (action.type){
         case "ADD-MESSAGE":
-            state.dialogMessage.push(
+            newState.dialogMessage.push(
                 {id: 3, text: state.messageText}
             )
-            state.messageText = ''
-            return state
+            newState.messageText = ''
+            return newState
         case "CHANGE-MESSAGE-TEXT":
-            state.messageText = action.text
-            return state
+            newState.messageText = action.text
+            return newState
         default:
             return state
     }

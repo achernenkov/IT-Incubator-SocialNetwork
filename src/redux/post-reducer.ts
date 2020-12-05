@@ -49,16 +49,19 @@ const initialState = {
 
 
 export const postReducer = (state:postStateType = initialState, action:actionsPostType):postStateType => {
+    let newState = {...state}
+    newState.postArray = [...state.postArray]
     switch (action.type){
         case 'ADD-POST':
-            state.postArray.push(
+
+            newState.postArray.push(
                 {id: 3, text: state.postText, like: 45}
             )
-            state.postText = ''
-            return state
+            newState.postText = ''
+            return newState
         case 'CHANGE-POST-TEXT':
-            state.postText = action.text
-            return state
+            newState.postText = action.text
+            return newState
         default:
             return state
     }
