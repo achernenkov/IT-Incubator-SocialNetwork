@@ -1,27 +1,27 @@
 import React, {FC} from 'react';
 import Microblog from "./Microblog";
 import {creatorActionAddPost, creatorActionChangePostText} from "../../../redux/post-reducer";
+import {connect} from "react-redux";
 
-type MicroblogContainerType = {
-    store: any
+let mapStateToProps = (state:any) => {
+    return {
+        state: state.postState
+    }
 }
 
-const MicroblogContainer: React.FC<MicroblogContainerType> = (props) => {
+let mapDispatchToProps = (dispatch:any) => {
+    return {
+        changeTextPublishPost: (value:string) => {
+            dispatch(creatorActionChangePostText(value))
+        },
+        addPost: () => {
+            dispatch(creatorActionAddPost())
+        }
 
-    const changeTextPublishPost = (value: string) => {
-        debugger
-        props.store.dispatch(creatorActionChangePostText(value))
     }
-
-    const addPost = () => {
-        props.store.dispatch(creatorActionAddPost())
-    }
-
-    return <Microblog
-        state={props.store.getState().postState}
-        addPost={addPost}
-        changeTextPublishPost={changeTextPublishPost}
-    />
 }
+
+let MicroblogContainer = connect(mapStateToProps,mapDispatchToProps)(Microblog)
+
 
 export default MicroblogContainer;

@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './redux/redux-store'
+import {Provider} from "react-redux";
 
 console.log(store)
 
 const RenderingApp = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <App store={store}/>
+            <Provider store={store}>
+                <App/>
+            </Provider>
         </React.StrictMode>,
         document.getElementById('root')
     );
@@ -19,7 +22,7 @@ const RenderingApp = () => {
 
 RenderingApp()
 
-store.subscribe( ()=> {
+store.subscribe(() => {
     RenderingApp()
 })
 
