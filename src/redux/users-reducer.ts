@@ -15,12 +15,12 @@ export type UsersStateType = {
 
 export type FollowACType = {
     type: 'FOLLOW'
-    userID: string
+    userID: number
 }
 
 export type UnFollowACType = {
     type: 'UNFOLLOW'
-    userID: string
+    userID: number
 }
 
 type UsersACType = FollowACType | UnFollowACType
@@ -80,15 +80,32 @@ const initialState = [
 
 // AC
 
-export const followAC = (userID: string):FollowACType => ({type: 'FOLLOW', userID: userID})
+export const followAC = (userID: number):FollowACType => ({type: 'FOLLOW', userID: userID})
 
-export const unFollowAC = (userID: string):UnFollowACType => ({type: 'UNFOLLOW', userID: userID})
+export const unFollowAC = (userID: number):UnFollowACType => ({type: 'UNFOLLOW', userID: userID})
 
 
 // Reducer users
 
 export const usersReducer = (state: Array<UsersStateType> = initialState, action: UsersACType ) =>{
+    debugger
     switch (action.type){
+        case "FOLLOW":
+            return [
+                ...state.map(u => {
+                    if(u.id === action.userID){
+                        return {...u, followed: true}
+                    }return u
+                })
+            ]
+        case "UNFOLLOW":
+            return [
+                ...state.map(u => {
+                    if(u.id === action.userID){
+                        return {...u, followed: false}
+                    } return u
+                })
+            ]
         default:
             return state
     }

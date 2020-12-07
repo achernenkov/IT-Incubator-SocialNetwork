@@ -13,8 +13,8 @@ type MSTPType = {
 }
 
 type MDTPType = {
-    followAC: (userID: string) => void
-    unFollowAC: (userID: string) => void
+    followAC: (userID: number) => void
+    unFollowAC: (userID: number) => void
 }
 
 
@@ -26,10 +26,10 @@ let mapStateToProps = (state:RootStateType):MSTPType => {
 
 let mapDispatchToProps = (dispatch:dispatchType):MDTPType => {
     return {
-        followAC: (userID: string) => {
+        followAC: (userID: number) => {
             dispatch(followAC(userID))
         },
-        unFollowAC: (userID: string) => {
+        unFollowAC: (userID: number) => {
             dispatch(unFollowAC(userID))
         }
 
