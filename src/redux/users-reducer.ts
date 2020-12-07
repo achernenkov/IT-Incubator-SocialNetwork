@@ -80,9 +80,9 @@ const initialState = [
 
 // AC
 
-const followAC = (userID: string):FollowACType => ({type: 'FOLLOW', userID: userID})
+export const followAC = (userID: string):FollowACType => ({type: 'FOLLOW', userID: userID})
 
-const inFollowAC = (userID: string):UnFollowACType => ({type: 'UNFOLLOW', userID: userID})
+export const unFollowAC = (userID: string):UnFollowACType => ({type: 'UNFOLLOW', userID: userID})
 
 
 // Reducer users
