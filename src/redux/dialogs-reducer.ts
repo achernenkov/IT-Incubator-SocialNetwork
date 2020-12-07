@@ -1,10 +1,5 @@
 // Type
 
-
-
-
-
-
 export type dialogMessageType = {
     id: number
     text: string
