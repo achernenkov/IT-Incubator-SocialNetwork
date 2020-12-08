@@ -15,9 +15,9 @@ const App: React.FC = () => {
                 <Header/>
                 <Navbar/>
                 <div className='content-wrapper'>
-                    <Route path='/profile' render={() => <Content/> } />
-                    <Route path='/dialogs' render={() => <DialogsContainer/> } />
-                    <Route path='/users' render={() => <UsersContainer/> } />
+                    <Route path='/profile' render={() => <Content/>}/>
+                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
                 </div>
             </div>
         </BrowserRouter>

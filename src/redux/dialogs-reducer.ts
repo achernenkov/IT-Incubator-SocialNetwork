@@ -60,12 +60,16 @@ const initialState = {
 //
 // Reducer message
 
-const messageReducer = (state:dialogsStateType = initialState, action:actionsMessageType): dialogsStateType => {
-    switch (action.type){
+const messageReducer = (state: dialogsStateType = initialState, action: actionsMessageType): dialogsStateType => {
+    switch (action.type) {
         case "ADD-MESSAGE":
-            return {...state,dialogMessage:[...state.dialogMessage, {id: 3, text: state.messageText}], messageText: ''}
+            return {
+                ...state,
+                dialogMessage: [...state.dialogMessage, {id: 3, text: state.messageText}],
+                messageText: ''
+            }
         case "CHANGE-MESSAGE-TEXT":
-            return {...state, messageText:action.text}
+            return {...state, messageText: action.text}
         default:
             return state
     }

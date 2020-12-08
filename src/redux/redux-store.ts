@@ -6,9 +6,9 @@ import {FollowACType, UnFollowACType, usersReducer, UsersStateType} from "./user
 // Type ----------------------------------------------------------------------------
 
 export type RootStateType = {
-    dialogsState:dialogsStateType
-    postState:postStateType
-    usersState:Array<UsersStateType>
+    dialogsState: dialogsStateType
+    postState: postStateType
+    usersState: Array<UsersStateType>
 }
 
 export type actionType = addPostDispatchType
@@ -21,7 +21,6 @@ export type actionType = addPostDispatchType
 export type dispatchType = (action: actionType) => void
 
 // End Type -------------------------------------------------------------------------
-
 
 
 const reducers = combineReducers({

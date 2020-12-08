@@ -37,8 +37,8 @@ export const creatorActionChangePostText = (PostText: string): changePostTextDis
 //InitialState
 
 const initialState = {
-        postText: '',
-        postArray: [
+    postText: '',
+    postArray: [
         {id: 1, text: 'Мой первый пост через Props', like: 41},
         {id: 2, text: 'Это мой второй пост через Props', like: 21}
     ]
@@ -48,10 +48,10 @@ const initialState = {
 // Reducer post
 
 
-export const postReducer = (state:postStateType = initialState, action:actionsPostType):postStateType => {
-    switch (action.type){
+export const postReducer = (state: postStateType = initialState, action: actionsPostType): postStateType => {
+    switch (action.type) {
         case 'ADD-POST':
-            return {...state,postArray: [...state.postArray, {id: 3, text: state.postText, like: 45}], postText: ''}
+            return {...state, postArray: [...state.postArray, {id: 3, text: state.postText, like: 45}], postText: ''}
         case 'CHANGE-POST-TEXT':
             return {...state, postText: action.text}
         default:

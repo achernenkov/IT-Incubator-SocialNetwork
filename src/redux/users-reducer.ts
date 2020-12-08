@@ -1,4 +1,3 @@
-
 type UsersLocationType = {
     county: string
     city: string
@@ -77,33 +76,34 @@ const initialState = [
 ]
 
 
-
 // AC
 
-export const followAC = (userID: number):FollowACType => ({type: 'FOLLOW', userID: userID})
+export const followAC = (userID: number): FollowACType => ({type: 'FOLLOW', userID: userID})
 
-export const unFollowAC = (userID: number):UnFollowACType => ({type: 'UNFOLLOW', userID: userID})
+export const unFollowAC = (userID: number): UnFollowACType => ({type: 'UNFOLLOW', userID: userID})
 
 
 // Reducer users
 
-export const usersReducer = (state: Array<UsersStateType> = initialState, action: UsersACType ) =>{
+export const usersReducer = (state: Array<UsersStateType> = initialState, action: UsersACType) => {
     debugger
-    switch (action.type){
+    switch (action.type) {
         case "FOLLOW":
             return [
                 ...state.map(u => {
-                    if(u.id === action.userID){
+                    if (u.id === action.userID) {
                         return {...u, followed: true}
-                    }return u
+                    }
+                    return u
                 })
             ]
         case "UNFOLLOW":
             return [
                 ...state.map(u => {
-                    if(u.id === action.userID){
+                    if (u.id === action.userID) {
                         return {...u, followed: false}
-                    } return u
+                    }
+                    return u
                 })
             ]
         default:
