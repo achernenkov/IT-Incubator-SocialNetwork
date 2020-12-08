@@ -14,15 +14,15 @@ type MDTPType = {
 }
 
 
-let mapStateToProps = (state:RootStateType):MSTPType => {
+let mapStateToProps = (state: RootStateType): MSTPType => {
     return {
         state: state.dialogsState
     }
 }
 
-let mapDispatchToProps = (dispatch:dispatchType):MDTPType => {
+let mapDispatchToProps = (dispatch: dispatchType): MDTPType => {
     return {
-        changeMessageText: (value:string) => {
+        changeMessageText: (value: string) => {
             dispatch(creatorActionChangeMessageText(value))
         },
         addMessage: () => {
@@ -32,6 +32,6 @@ let mapDispatchToProps = (dispatch:dispatchType):MDTPType => {
     }
 }
 
-let DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs)
+let DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
 export default DialogsContainer;

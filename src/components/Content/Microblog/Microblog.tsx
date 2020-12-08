@@ -7,7 +7,7 @@ import {postStateType} from "../../../redux/post-reducer";
 type microblogType = {
     state: postStateType
     addPost: () => void
-    changeTextPublishPost: (value:string) => void
+    changeTextPublishPost: (value: string) => void
 }
 
 const Microblog: React.FC<microblogType> = (props) => {

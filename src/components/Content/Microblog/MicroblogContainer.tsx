@@ -14,15 +14,15 @@ type MDTPType = {
     addPost: () => void
 }
 
-let mapStateToProps = (state:RootStateType):MSTPType => {
+let mapStateToProps = (state: RootStateType): MSTPType => {
     return {
         state: state.postState
     }
 }
 
-let mapDispatchToProps = (dispatch:dispatchType):MDTPType => {
+let mapDispatchToProps = (dispatch: dispatchType): MDTPType => {
     return {
-        changeTextPublishPost: (value:string) => {
+        changeTextPublishPost: (value: string) => {
             dispatch(creatorActionChangePostText(value))
         },
         addPost: () => {
@@ -32,7 +32,7 @@ let mapDispatchToProps = (dispatch:dispatchType):MDTPType => {
     }
 }
 
-let MicroblogContainer = connect(mapStateToProps,mapDispatchToProps)(Microblog)
+let MicroblogContainer = connect(mapStateToProps, mapDispatchToProps)(Microblog)
 
 
 export default MicroblogContainer;

@@ -9,7 +9,7 @@ type UsersDialogs = {
 }
 
 const UsersDialogs: React.FC<UsersDialogs> = (props: UsersDialogs) => {
-    return(
+    return (
         <div><NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink></div>
     )
 }

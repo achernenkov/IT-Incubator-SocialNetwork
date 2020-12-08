@@ -7,7 +7,7 @@ import {dialogsStateType} from './../../redux/state'
 type DialogsType = {
     state: dialogsStateType
     addMessage: () => void
-    changeMessageText: (value:string) => void
+    changeMessageText: (value: string) => void
 }
 
 const Dialogs: React.FC<DialogsType> = (props) => {

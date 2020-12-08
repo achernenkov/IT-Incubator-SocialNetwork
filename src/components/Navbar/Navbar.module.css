@@ -1,19 +1,19 @@
-.nav{
+.nav {
     grid-area: n;
-    background-color:sandybrown;
+    background-color: sandybrown;
     padding: 20px;
 }
 
-.nav a{
-    color:black;
+.nav a {
+    color: black;
     text-decoration: none;
 }
 
-.nav a.active{
-    color:gold;
+.nav a.active {
+    color: gold;
 }
 
-.nav a:hover{
+.nav a:hover {
     color: darkgray;
 }
 
