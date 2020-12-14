@@ -1,10 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
-import Dialogs from "../Dialogs/Dialogs";
 import Users from "./Users";
-import {creatorActionAddMessage, creatorActionChangeMessageText, dialogsStateType} from "../../redux/dialogs-reducer";
 import {dispatchType, RootStateType} from "../../redux/redux-store";
-import {followAC, unFollowAC, UsersStateType} from "../../redux/users-reducer";
+import {followAC,unFollowAC, UsersStateType} from "../../redux/users-reducer";
+import axios from "axios";
+
+axios.get('https://social-network.samuraijs.com/api/1.0/users').then(obj => {
+    console.log(obj.data.items)
+})
 
 
 type MSTPType = {

@@ -86,7 +86,6 @@ export const unFollowAC = (userID: number): UnFollowACType => ({type: 'UNFOLLOW'
 // Reducer users
 
 export const usersReducer = (state: Array<UsersStateType> = initialState, action: UsersACType) => {
-    debugger
     switch (action.type) {
         case "FOLLOW":
             return [
