@@ -42,7 +42,7 @@ export const followAC = (userID: number): FollowACType => ({type: 'FOLLOW', user
 
 export const unFollowAC = (userID: number): UnFollowACType => ({type: 'UNFOLLOW', userID: userID})
 
-export const pushUsersAC = (users: Array<UsersArrayType>): any => ({type: 'SET-USERS', users})
+export const pushUsersAC = (users: Array<UsersArrayType>): pushUsersACType => ({type: 'SET-USERS', users})
 
 // Reducer users
 

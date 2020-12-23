@@ -1,7 +1,7 @@
 import {createStore, combineReducers} from 'redux'
 import postReducer, {addPostDispatchType, changePostTextDispatchType, postStateType} from "./post-reducer";
 import messageReducer, {addMessageDispatchType, changeMessageDispatchType, dialogsStateType} from "./dialogs-reducer";
-import {FollowACType, UnFollowACType, usersReducer, UsersStateType} from "./users-reducer";
+import {FollowACType, pushUsersACType, UnFollowACType, usersReducer, UsersStateType} from "./users-reducer";
 
 // Type ----------------------------------------------------------------------------
 
@@ -17,6 +17,7 @@ export type actionType = addPostDispatchType
     | changeMessageDispatchType
     | FollowACType
     | UnFollowACType
+    | pushUsersACType
 
 export type dispatchType = (action: actionType) => void
 
