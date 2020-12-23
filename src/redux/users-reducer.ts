@@ -32,7 +32,12 @@ export type pushUsersACType = {
     users: Array<UsersArrayType>
 }
 
-type UsersACType = FollowACType | UnFollowACType | pushUsersACType
+export type setCurrentPageACType = {
+    type: 'SET-CURRENT-PAGE'
+    currentPage: number
+}
+
+type UsersACType = FollowACType | UnFollowACType | pushUsersACType | setCurrentPageACType
 
 const initialState: UsersStateType = {
     users: [],
@@ -50,6 +55,7 @@ export const unFollowAC = (userID: number): UnFollowACType => ({type: 'UNFOLLOW'
 
 export const pushUsersAC = (users: Array<UsersArrayType>): pushUsersACType => ({type: 'SET-USERS', users})
 
+export const setCurrentPageAC = (currentPage: number): setCurrentPageACType => ({type: "SET-CURRENT-PAGE", currentPage})
 // Reducer users
 
 export const usersReducer = (state: UsersStateType = initialState, action: UsersACType) => {
@@ -76,6 +82,9 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
                     return u
                 })
             ]}
+        case "SET-CURRENT-PAGE":
+            debugger
+            return {...state, currentPage: action.currentPage}
         default:
             return state
     }

@@ -2,7 +2,14 @@ import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
 import {dispatchType, RootStateType} from "../../redux/redux-store";
-import {followAC, pushUsersAC, unFollowAC, UsersArrayType, UsersStateType} from "../../redux/users-reducer";
+import {
+    followAC,
+    pushUsersAC,
+    setCurrentPageAC,
+    unFollowAC,
+    UsersArrayType,
+    UsersStateType
+} from "../../redux/users-reducer";
 import axios from "axios";
 import s from "./Users.module.css";
 
@@ -12,13 +19,20 @@ type UsersPropsType = {
     state: UsersStateType
     unFollowAC: (userID: number) => void
     pushUsers: (users: Array<UsersArrayType>) => void
+    setCurrentPage: (currentPage: number) => void
 }
 
 class UsersAPIContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() {
-        debugger
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(obj => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.state.currentPage}&count=${this.props.state.pageSize}`).then(obj => {
+            this.props.pushUsers(obj.data.items)
+        })
+    }
+
+    onPageChanged = (p:number) => {
+        this.props.setCurrentPage(p)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.state.currentPage}&count=${this.props.state.pageSize}`).then(obj => {
             this.props.pushUsers(obj.data.items)
         })
     }
@@ -31,6 +45,7 @@ class UsersAPIContainer extends React.Component<UsersPropsType> {
                 state={this.props.state}
                 pageSize={this.props.state.pageSize}
                 currentPage={this.props.state.currentPage}
+                onPageChanged={this.onPageChanged}
             />)
     }
 }
@@ -44,6 +59,7 @@ type MDTPType = {
     followAC: (userID: number) => void
     unFollowAC: (userID: number) => void
     pushUsers: (users: Array<UsersArrayType>) => void
+    setCurrentPage: (currentPage: number) => void
 }
 
 
@@ -63,6 +79,9 @@ let mapDispatchToProps = (dispatch: dispatchType): MDTPType => {
         },
         pushUsers: (users: Array<UsersArrayType>) => {
             dispatch(pushUsersAC(users))
+        },
+        setCurrentPage: (currentPage: number) => {
+            dispatch(setCurrentPageAC(currentPage))
         }
 
     }

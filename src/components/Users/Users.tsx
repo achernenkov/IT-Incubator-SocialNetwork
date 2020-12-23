@@ -8,6 +8,7 @@ type UsersPropsType = {
     unFollowAC: (userID: number) => void
     pageSize: number
     currentPage: number
+    onPageChanged: (p:number) => void
 }
 
 const Users: React.FC<UsersPropsType> = (props) => {
@@ -23,7 +24,9 @@ const Users: React.FC<UsersPropsType> = (props) => {
 
         {
             current.map(el => {
-                return <span className={el === props.currentPage ? s.cp: ''}>{el}</span>
+                return <span
+                    onClick={()=>{props.onPageChanged(el)}}
+                    className={el === props.currentPage ? s.cp: ''}>{el}</span>
             })
 
         }
