@@ -6,12 +6,28 @@ type UsersPropsType = {
     followAC: (userID: number) => void
     state: UsersStateType
     unFollowAC: (userID: number) => void
+    pageSize: number
+    currentPage: number
 }
 
 const Users: React.FC<UsersPropsType> = (props) => {
 
+    let current = []
+
+    for(let i = 1; i <= props.pageSize; i++){
+        current.push(i)
+    }
+
 
     return (<div>
+
+        {
+            current.map(el => {
+                return <span className={el === props.currentPage ? s.cp: ''}>{el}</span>
+            })
+
+        }
+
         {
             props.state.users.map(el => <div className={s.users} key={el.id}>
                     <div><img src={el.photos.small} className={s.img}/></div>

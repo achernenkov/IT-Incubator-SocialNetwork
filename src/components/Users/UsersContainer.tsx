@@ -29,6 +29,8 @@ class UsersAPIContainer extends React.Component<UsersPropsType> {
                 followAC={this.props.followAC}
                 unFollowAC={this.props.unFollowAC}
                 state={this.props.state}
+                pageSize={this.props.state.pageSize}
+                currentPage={this.props.state.currentPage}
             />)
     }
 }

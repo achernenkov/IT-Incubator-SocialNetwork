@@ -38,7 +38,7 @@ const initialState: UsersStateType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 21,
-    currentPage: 2
+    currentPage: 1
 }
 
 
