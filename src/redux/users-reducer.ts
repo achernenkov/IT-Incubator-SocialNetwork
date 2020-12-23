@@ -5,8 +5,8 @@ export type UsersArrayType = {
     uniqueUrlName: null
     status: string | null
     photos: {
-        small: any
-        large: any
+        small: string | undefined
+        large: string | undefined
     }
 }
 
