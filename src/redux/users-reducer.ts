@@ -12,6 +12,9 @@ export type UsersArrayType = {
 
 export type UsersStateType = {
     users: Array<UsersArrayType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 export type FollowACType = {
@@ -32,7 +35,10 @@ export type pushUsersACType = {
 type UsersACType = FollowACType | UnFollowACType | pushUsersACType
 
 const initialState: UsersStateType = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 21,
+    currentPage: 2
 }
 
 
@@ -52,24 +58,24 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
             debugger
            return  {...state, users: [...action.users] }
         }
-        // case "FOLLOW":
-        //     return [
-        //         ...state.map(u => {
-        //             if (u.id === action.userID) {
-        //                 return {...u, followed: true}
-        //             }
-        //             return u
-        //         })
-        //     ]
-        // case "UNFOLLOW":
-        //     return [
-        //         ...state.map(u => {
-        //             if (u.id === action.userID) {
-        //                 return {...u, followed: false}
-        //             }
-        //             return u
-        //         })
-        //     ]
+        case "FOLLOW":
+            return {...state, users: [
+                ...state.users.map(u => {
+                    if (u.id === action.userID) {
+                        return {...u, followed: true}
+                    }
+                    return u
+                })
+            ]}
+        case "UNFOLLOW":
+            return {...state, users: [
+                ...state.users.map(u => {
+                    if (u.id === action.userID) {
+                        return {...u, followed: false}
+                    }
+                    return u
+                })
+            ]}
         default:
             return state
     }
