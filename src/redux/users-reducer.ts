@@ -37,12 +37,17 @@ export type setCurrentPageACType = {
     currentPage: number
 }
 
-type UsersACType = FollowACType | UnFollowACType | pushUsersACType | setCurrentPageACType
+export type setTotalUsersCountACType = {
+    type: 'TOTAL-USERS-COUNT'
+    totalUsersCount: number
+}
+
+type UsersACType = FollowACType | UnFollowACType | pushUsersACType | setCurrentPageACType | setTotalUsersCountACType
 
 const initialState: UsersStateType = {
     users: [],
     pageSize: 5,
-    totalUsersCount: 21,
+    totalUsersCount: 40,
     currentPage: 1
 }
 
@@ -56,6 +61,8 @@ export const unFollowAC = (userID: number): UnFollowACType => ({type: 'UNFOLLOW'
 export const pushUsersAC = (users: Array<UsersArrayType>): pushUsersACType => ({type: 'SET-USERS', users})
 
 export const setCurrentPageAC = (currentPage: number): setCurrentPageACType => ({type: "SET-CURRENT-PAGE", currentPage})
+
+export const setTotalUsersCountAC = (totalUsersCount: number): setTotalUsersCountACType => ({type: "TOTAL-USERS-COUNT", totalUsersCount})
 // Reducer users
 
 export const usersReducer = (state: UsersStateType = initialState, action: UsersACType) => {
@@ -83,8 +90,9 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
                 })
             ]}
         case "SET-CURRENT-PAGE":
-            debugger
             return {...state, currentPage: action.currentPage}
+        case "TOTAL-USERS-COUNT":
+            return {...state, totalUsersCount: action.totalUsersCount}
         default:
             return state
     }

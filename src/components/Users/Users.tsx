@@ -13,9 +13,10 @@ type UsersPropsType = {
 
 const Users: React.FC<UsersPropsType> = (props) => {
 
+    let pageCount = Math.ceil(props.state.totalUsersCount / props.state.pageSize)
     let current = []
 
-    for(let i = 1; i <= props.pageSize; i++){
+    for(let i = 1; i <= pageCount; i++){
         current.push(i)
     }
 
@@ -26,7 +27,7 @@ const Users: React.FC<UsersPropsType> = (props) => {
             current.map(el => {
                 return <span
                     onClick={()=>{props.onPageChanged(el)}}
-                    className={el === props.currentPage ? s.cp: ''}>{el}</span>
+                    className={el === props.currentPage ? s.cp: ''}>| {el} |</span>
             })
 
         }
