@@ -8,7 +8,7 @@ import {FollowACType, UnFollowACType, usersReducer, UsersStateType} from "./user
 export type RootStateType = {
     dialogsState: dialogsStateType
     postState: postStateType
-    usersState: Array<UsersStateType>
+    usersState: UsersStateType
 }
 
 export type actionType = addPostDispatchType

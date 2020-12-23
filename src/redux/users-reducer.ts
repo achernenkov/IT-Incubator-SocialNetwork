@@ -1,15 +1,17 @@
-type UsersLocationType = {
-    county: string
-    city: string
+export type UsersArrayType = {
+    name: string
+    id: number
+    followed: boolean
+    uniqueUrlName: null
+    status: string | null
+    photos: {
+        small: any
+        large: any
+    }
 }
 
 export type UsersStateType = {
-    id: number
-    avatar: string
-    name: string
-    status: string
-    location: UsersLocationType
-    followed: boolean
+    users: Array<UsersArrayType>
 }
 
 export type FollowACType = {
@@ -22,58 +24,16 @@ export type UnFollowACType = {
     userID: number
 }
 
-type UsersACType = FollowACType | UnFollowACType
+export type pushUsersACType = {
+    type: 'SET-USERS'
+    users: Array<UsersArrayType>
+}
 
-const initialState = [
-    {
-        id: 1,
-        avatar: 'https://assets.faceit-cdn.net/avatars/3ab63293-7796-4c0e-b7ef-2a0e461caad9_1556910015746.jpg',
-        name: 'Andrey',
-        status: 'Hello, World!',
-        location: {
-            county: "Belarus",
-            city: 'Minsk'
-        },
-        followed: true
+type UsersACType = FollowACType | UnFollowACType | pushUsersACType
 
-    },
-    {
-        id: 2,
-        avatar: 'https://assets.faceit-cdn.net/avatars/3ab63293-7796-4c0e-b7ef-2a0e461caad9_1556910015746.jpg',
-        name: 'Misha',
-        status: 'Hello, Russia!',
-        location: {
-            county: "Russia",
-            city: 'Moskov'
-        },
-        followed: false
-
-    },
-    {
-        id: 3,
-        avatar: 'https://assets.faceit-cdn.net/avatars/3ab63293-7796-4c0e-b7ef-2a0e461caad9_1556910015746.jpg',
-        name: 'Kostya',
-        status: 'Hello, Kiyv!',
-        location: {
-            county: "Ukraine",
-            city: 'Kiev'
-        },
-        followed: false
-
-    },
-    {
-        id: 4,
-        avatar: 'https://assets.faceit-cdn.net/avatars/3ab63293-7796-4c0e-b7ef-2a0e461caad9_1556910015746.jpg',
-        name: 'Nikita',
-        status: 'Hello, LA!',
-        location: {
-            county: "USA",
-            city: 'Kalifornia'
-        },
-        followed: true
-
-    }
-]
+const initialState: UsersStateType = {
+    users: []
+}
 
 
 // AC
@@ -82,29 +42,34 @@ export const followAC = (userID: number): FollowACType => ({type: 'FOLLOW', user
 
 export const unFollowAC = (userID: number): UnFollowACType => ({type: 'UNFOLLOW', userID: userID})
 
+export const pushUsersAC = (users: Array<UsersArrayType>): any => ({type: 'SET-USERS', users})
 
 // Reducer users
 
-export const usersReducer = (state: Array<UsersStateType> = initialState, action: UsersACType) => {
+export const usersReducer = (state: UsersStateType = initialState, action: UsersACType) => {
     switch (action.type) {
-        case "FOLLOW":
-            return [
-                ...state.map(u => {
-                    if (u.id === action.userID) {
-                        return {...u, followed: true}
-                    }
-                    return u
-                })
-            ]
-        case "UNFOLLOW":
-            return [
-                ...state.map(u => {
-                    if (u.id === action.userID) {
-                        return {...u, followed: false}
-                    }
-                    return u
-                })
-            ]
+        case "SET-USERS":{
+            debugger
+           return  {...state, users: [...action.users] }
+        }
+        // case "FOLLOW":
+        //     return [
+        //         ...state.map(u => {
+        //             if (u.id === action.userID) {
+        //                 return {...u, followed: true}
+        //             }
+        //             return u
+        //         })
+        //     ]
+        // case "UNFOLLOW":
+        //     return [
+        //         ...state.map(u => {
+        //             if (u.id === action.userID) {
+        //                 return {...u, followed: false}
+        //             }
+        //             return u
+        //         })
+        //     ]
         default:
             return state
     }

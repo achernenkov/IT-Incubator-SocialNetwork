@@ -2,22 +2,27 @@ import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
 import {dispatchType, RootStateType} from "../../redux/redux-store";
-import {followAC, unFollowAC, UsersStateType} from "../../redux/users-reducer";
+import {followAC, pushUsersAC, unFollowAC, UsersArrayType, UsersStateType} from "../../redux/users-reducer";
 import axios from "axios";
 import s from "./Users.module.css";
 
-axios.get('https://social-network.samuraijs.com/api/1.0/users').then(obj => {
-    debugger
-    console.log(obj.data.items)
-})
 
 type UsersPropsType = {
     followAC: (userID: number) => void
-    state: Array<UsersStateType>
+    state: UsersStateType
     unFollowAC: (userID: number) => void
+    pushUsers: (users: Array<UsersArrayType>) => void
 }
 
 class UsersAPIContainer extends React.Component<UsersPropsType> {
+
+    componentDidMount() {
+        debugger
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(obj => {
+            this.props.pushUsers(obj.data.items)
+        })
+    }
+
     render() {
         return (
             <Users
@@ -30,12 +35,13 @@ class UsersAPIContainer extends React.Component<UsersPropsType> {
 
 
 type MSTPType = {
-    state: Array<UsersStateType>
+    state: UsersStateType
 }
 
 type MDTPType = {
     followAC: (userID: number) => void
     unFollowAC: (userID: number) => void
+    pushUsers: (users: Array<UsersArrayType>) => void
 }
 
 
@@ -52,6 +58,9 @@ let mapDispatchToProps = (dispatch: dispatchType): MDTPType => {
         },
         unFollowAC: (userID: number) => {
             dispatch(unFollowAC(userID))
+        },
+        pushUsers: (users: Array<UsersArrayType>) => {
+            dispatch(pushUsersAC(users))
         }
 
     }
