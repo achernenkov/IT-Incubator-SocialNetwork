@@ -83,7 +83,6 @@ export const setIsLoadingAC = (isLoading: boolean) : setIsLoadingACType => ({typ
 export const usersReducer = (state: UsersStateType = initialState, action: UsersACType) => {
     switch (action.type) {
         case "SET-USERS":{
-            debugger
            return  {...state, users: [...action.users] }
         }
         case "FOLLOW":

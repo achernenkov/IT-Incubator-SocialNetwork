@@ -11,6 +11,7 @@ import {
     UsersStateType
 } from "../../redux/users-reducer";
 import axios from "axios";
+import Preloader from "../Common/Preloader/Preloader";
 
 
 type UsersPropsType = {
@@ -46,7 +47,7 @@ class UsersAPIContainer extends React.Component<UsersPropsType> {
     render() {
         return (
             <>
-                {this.props.state.isLoading ? console.log(true) : console.log(false)}
+                {this.props.state.isLoading ? <Preloader /> : null}
 
                 <Users
                     followAC={this.props.followAC}
