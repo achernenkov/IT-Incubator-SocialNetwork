@@ -28,6 +28,10 @@ export type SetDataUserProfileAC = {
 
 export type TotalUserProfileAC = SetDataUserProfileAC
 
+export const SetDataUserProfil = (UserProfile: UserProfileType): SetDataUserProfileAC => {
+    return {type: "SET-DATA-USER-PROFILE", UserProfile}
+}
+
 
 let initialState = {
 
@@ -35,6 +39,8 @@ let initialState = {
 
 export const userProfileReducer = (state: UserProfileType | {} = initialState, action: TotalUserProfileAC): UserProfileType | {} => {
     switch (action.type) {
+        case "SET-DATA-USER-PROFILE":
+            return {...action.UserProfile}
         default:
             return state
     }

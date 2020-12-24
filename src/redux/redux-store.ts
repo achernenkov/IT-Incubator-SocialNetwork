@@ -9,7 +9,7 @@ import {
     usersReducer,
     UsersStateType
 } from "./users-reducer";
-import userProfileReducer, {UserProfileType} from './userProfile-reducer'
+import userProfileReducer, {SetDataUserProfileAC, UserProfileType} from './userProfile-reducer'
 
 // Type ----------------------------------------------------------------------------
 
@@ -30,6 +30,7 @@ export type actionType = addPostDispatchType
     | setCurrentPageACType
     | setTotalUsersCountACType
     | setIsLoadingACType
+    | SetDataUserProfileAC
 
 export type dispatchType = (action: actionType) => void
 

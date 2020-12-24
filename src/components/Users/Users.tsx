@@ -1,6 +1,7 @@
 import React, {FormEvent} from "react";
 import {UsersStateType} from "../../redux/users-reducer";
 import s from './Users.module.css'
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     follow: (userID: number) => void
@@ -8,7 +9,7 @@ type UsersPropsType = {
     unFollow: (userID: number) => void
     pageSize: number
     currentPage: number
-    onPageChanged: (p:number) => void
+    onPageChanged: (p: number) => void
 }
 
 const Users: React.FC<UsersPropsType> = (props) => {
@@ -16,7 +17,7 @@ const Users: React.FC<UsersPropsType> = (props) => {
     let pageCount = Math.ceil(props.state.totalUsersCount / props.state.pageSize)
     let current = []
 
-    for(let i = 1; i <= pageCount; i++){
+    for (let i = 1; i <= pageCount; i++) {
         current.push(i)
     }
 
@@ -26,15 +27,21 @@ const Users: React.FC<UsersPropsType> = (props) => {
         {
             current.map(el => {
                 return <span
-                    onClick={()=>{props.onPageChanged(el)}}
-                    className={el === props.currentPage ? s.cp: ''}>| {el} |</span>
+                    onClick={() => {
+                        props.onPageChanged(el)
+                    }}
+                    className={el === props.currentPage ? s.cp : ''}>| {el} |</span>
             })
 
         }
 
         {
             props.state.users.map(el => <div className={s.users} key={el.id}>
-                    <div><img src={el.photos.small} className={s.img}/></div>
+                    <div>
+                        <NavLink to={'/profile/2'}>
+                            <img src={el.photos.small} className={s.img}/>
+                        </NavLink>
+                    </div>
                     <div>Name: {el.name}</div>
                     <div>Status: {el.status}</div>
                     <div>
