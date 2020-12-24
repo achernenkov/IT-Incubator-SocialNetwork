@@ -66,17 +66,17 @@ const initialState: UsersStateType = {
 
 // AC
 
-export const followAC = (userID: number): FollowACType => ({type: 'FOLLOW', userID: userID})
+export const follow = (userID: number): FollowACType => ({type: 'FOLLOW', userID: userID})
 
-export const unFollowAC = (userID: number): UnFollowACType => ({type: 'UNFOLLOW', userID: userID})
+export const unFollow = (userID: number): UnFollowACType => ({type: 'UNFOLLOW', userID: userID})
 
-export const pushUsersAC = (users: Array<UsersArrayType>): pushUsersACType => ({type: 'SET-USERS', users})
+export const pushUsers = (users: Array<UsersArrayType>): pushUsersACType => ({type: 'SET-USERS', users})
 
-export const setCurrentPageAC = (currentPage: number): setCurrentPageACType => ({type: "SET-CURRENT-PAGE", currentPage})
+export const setCurrentPage = (currentPage: number): setCurrentPageACType => ({type: "SET-CURRENT-PAGE", currentPage})
 
-export const setTotalUsersCountAC = (totalUsersCount: number): setTotalUsersCountACType => ({type: "TOTAL-USERS-COUNT", totalUsersCount})
+export const setTotalUsersCount = (totalUsersCount: number): setTotalUsersCountACType => ({type: "TOTAL-USERS-COUNT", totalUsersCount})
 
-export const setIsLoadingAC = (isLoading: boolean) : setIsLoadingACType => ({type: "SET-IS-LOADING", isLoading})
+export const setIsLoading = (isLoading: boolean) : setIsLoadingACType => ({type: "SET-IS-LOADING", isLoading})
 
 // Reducer users
 

@@ -3,9 +3,9 @@ import {UsersStateType} from "../../redux/users-reducer";
 import s from './Users.module.css'
 
 type UsersPropsType = {
-    followAC: (userID: number) => void
+    follow: (userID: number) => void
     state: UsersStateType
-    unFollowAC: (userID: number) => void
+    unFollow: (userID: number) => void
     pageSize: number
     currentPage: number
     onPageChanged: (p:number) => void
@@ -39,7 +39,7 @@ const Users: React.FC<UsersPropsType> = (props) => {
                     <div>Status: {el.status}</div>
                     <div>
                         <button
-                            onClick={() => (el.followed ? props.unFollowAC(el.id) : props.followAC(el.id))}>{el.followed ? 'UnFollowed' : 'Followed'}</button>
+                            onClick={() => (el.followed ? props.unFollow(el.id) : props.follow(el.id))}>{el.followed ? 'UnFollowed' : 'Followed'}</button>
                     </div>
 
 

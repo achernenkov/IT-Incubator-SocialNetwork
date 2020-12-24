@@ -3,10 +3,10 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import {dispatchType, RootStateType} from "../../redux/redux-store";
 import {
-    followAC,
-    pushUsersAC,
-    setCurrentPageAC, setIsLoadingAC, setTotalUsersCountAC,
-    unFollowAC,
+    follow,
+    pushUsers,
+    setCurrentPage, setIsLoading, setTotalUsersCount,
+    unFollow,
     UsersArrayType,
     UsersStateType
 } from "../../redux/users-reducer";
@@ -15,9 +15,9 @@ import Preloader from "../Common/Preloader/Preloader";
 
 
 type UsersPropsType = {
-    followAC: (userID: number) => void
+    follow: (userID: number) => void
     state: UsersStateType
-    unFollowAC: (userID: number) => void
+    unFollow: (userID: number) => void
     pushUsers: (users: Array<UsersArrayType>) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
@@ -50,8 +50,8 @@ class UsersAPIContainer extends React.Component<UsersPropsType> {
                 {this.props.state.isLoading ? <Preloader /> : null}
 
                 <Users
-                    followAC={this.props.followAC}
-                    unFollowAC={this.props.unFollowAC}
+                    follow={this.props.follow}
+                    unFollow={this.props.unFollow}
                     state={this.props.state}
                     pageSize={this.props.state.pageSize}
                     currentPage={this.props.state.currentPage}
@@ -66,47 +66,19 @@ type MSTPType = {
     state: UsersStateType
 }
 
-type MDTPType = {
-    followAC: (userID: number) => void
-    unFollowAC: (userID: number) => void
-    pushUsers: (users: Array<UsersArrayType>) => void
-    setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (totalUsersCount: number) => void
-    setIsLoading: (isLoading: boolean) => void
-}
-
-
 let mapStateToProps = (state: RootStateType): MSTPType => {
     return {
         state: state.usersState
     }
 }
 
-let mapDispatchToProps = (dispatch: dispatchType): MDTPType => {
-    return {
-        followAC: (userID: number) => {
-            dispatch(followAC(userID))
-        },
-        unFollowAC: (userID: number) => {
-            dispatch(unFollowAC(userID))
-        },
-        pushUsers: (users: Array<UsersArrayType>) => {
-            dispatch(pushUsersAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUsersCount: (totalUsersCount: number) =>{
-            dispatch(setTotalUsersCountAC(totalUsersCount))
-        },
-        setIsLoading: (isLoading: boolean) => {
-            dispatch(setIsLoadingAC(isLoading))
-        }
-
-    }
-}
-
-
-let UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer)
+let UsersContainer = connect(mapStateToProps, {
+    follow,
+    unFollow,
+    pushUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    setIsLoading,
+})(UsersAPIContainer)
 
 export default UsersContainer
