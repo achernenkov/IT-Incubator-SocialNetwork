@@ -9,6 +9,7 @@ import {
     usersReducer,
     UsersStateType
 } from "./users-reducer";
+import userProfileReducer, {UserProfileType} from './userProfile-reducer'
 
 // Type ----------------------------------------------------------------------------
 
@@ -16,6 +17,7 @@ export type RootStateType = {
     dialogsState: dialogsStateType
     postState: postStateType
     usersState: UsersStateType
+    userProfileState: UserProfileType
 }
 
 export type actionType = addPostDispatchType
@@ -37,7 +39,8 @@ export type dispatchType = (action: actionType) => void
 const reducers = combineReducers({
     dialogsState: messageReducer,
     postState: postReducer,
-    usersState: usersReducer
+    usersState: usersReducer,
+    userProfileState: userProfileReducer
 })
 
 let store = createStore(reducers)
