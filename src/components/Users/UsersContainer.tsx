@@ -24,7 +24,7 @@ type UsersPropsType = {
     setIsLoading: (isLoading: boolean) => void
 }
 
-class UsersAPIContainer extends React.Component<UsersPropsType> {
+class UsersContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         this.props.setIsLoading(true)
@@ -72,13 +72,13 @@ let mapStateToProps = (state: RootStateType): MSTPType => {
     }
 }
 
-let UsersContainer = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
     follow,
     unFollow,
     pushUsers,
     setCurrentPage,
     setTotalUsersCount,
     setIsLoading,
-})(UsersAPIContainer)
+})(UsersContainer)
 
-export default UsersContainer
+
