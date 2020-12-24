@@ -4,13 +4,22 @@ import s from './Content.module.css'
 import MicroblogContainer from "./Microblog/MicroblogContainer";
 
 
-const Content: React.FC = () => {
-    return (
-        <section className={s.content}>
-            <Profile/>
-            <MicroblogContainer/>
-        </section>
-    )
+type ContentContainerType = {
+
 }
 
-export default Content;
+class ContentContainer extends React.Component<ContentContainerType>{
+
+    render() {
+        return (
+            <section className={s.content}>
+                <Profile/>
+                <MicroblogContainer/>
+            </section>
+        )
+    }
+
+}
+
+
+export default ContentContainer;
