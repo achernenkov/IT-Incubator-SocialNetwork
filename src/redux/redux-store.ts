@@ -4,7 +4,7 @@ import messageReducer, {addMessageDispatchType, changeMessageDispatchType, dialo
 import {
     FollowACType,
     pushUsersACType,
-    setCurrentPageACType, setTotalUsersCountACType,
+    setCurrentPageACType, setIsLoadingACType, setTotalUsersCountACType,
     UnFollowACType,
     usersReducer,
     UsersStateType
@@ -27,6 +27,7 @@ export type actionType = addPostDispatchType
     | pushUsersACType
     | setCurrentPageACType
     | setTotalUsersCountACType
+    | setIsLoadingACType
 
 export type dispatchType = (action: actionType) => void
 

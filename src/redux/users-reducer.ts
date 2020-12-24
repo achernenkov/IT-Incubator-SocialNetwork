@@ -15,6 +15,7 @@ export type UsersStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isLoading: boolean
 }
 
 export type FollowACType = {
@@ -42,13 +43,24 @@ export type setTotalUsersCountACType = {
     totalUsersCount: number
 }
 
-type UsersACType = FollowACType | UnFollowACType | pushUsersACType | setCurrentPageACType | setTotalUsersCountACType
+export type setIsLoadingACType = {
+    type: 'SET-IS-LOADING'
+    isLoading: boolean
+}
+
+type UsersACType = FollowACType
+    | UnFollowACType
+    | pushUsersACType
+    | setCurrentPageACType
+    | setTotalUsersCountACType
+    | setIsLoadingACType
 
 const initialState: UsersStateType = {
     users: [],
-    pageSize: 5,
-    totalUsersCount: 40,
-    currentPage: 1
+    pageSize: 10,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isLoading: false
 }
 
 
@@ -63,6 +75,9 @@ export const pushUsersAC = (users: Array<UsersArrayType>): pushUsersACType => ({
 export const setCurrentPageAC = (currentPage: number): setCurrentPageACType => ({type: "SET-CURRENT-PAGE", currentPage})
 
 export const setTotalUsersCountAC = (totalUsersCount: number): setTotalUsersCountACType => ({type: "TOTAL-USERS-COUNT", totalUsersCount})
+
+export const setIsLoadingAC = (isLoading: boolean) : setIsLoadingACType => ({type: "SET-IS-LOADING", isLoading})
+
 // Reducer users
 
 export const usersReducer = (state: UsersStateType = initialState, action: UsersACType) => {
@@ -93,6 +108,8 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
             return {...state, currentPage: action.currentPage}
         case "TOTAL-USERS-COUNT":
             return {...state, totalUsersCount: action.totalUsersCount}
+        case "SET-IS-LOADING":
+            return {...state, isLoading: action.isLoading}
         default:
             return state
     }

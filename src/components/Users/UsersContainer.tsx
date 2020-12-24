@@ -5,13 +5,12 @@ import {dispatchType, RootStateType} from "../../redux/redux-store";
 import {
     followAC,
     pushUsersAC,
-    setCurrentPageAC, setTotalUsersCountAC,
+    setCurrentPageAC, setIsLoadingAC, setTotalUsersCountAC,
     unFollowAC,
     UsersArrayType,
     UsersStateType
 } from "../../redux/users-reducer";
 import axios from "axios";
-import s from "./Users.module.css";
 
 
 type UsersPropsType = {
@@ -21,34 +20,43 @@ type UsersPropsType = {
     pushUsers: (users: Array<UsersArrayType>) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
+    setIsLoading: (isLoading: boolean) => void
 }
 
 class UsersAPIContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() {
+        this.props.setIsLoading(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.state.currentPage}&count=${this.props.state.pageSize}`).then(obj => {
+            this.props.setIsLoading(false)
             this.props.pushUsers(obj.data.items)
             this.props.setTotalUsersCount(obj.data.totalCount)
         })
     }
 
     onPageChanged = (p:number) => {
+        this.props.setIsLoading(true)
         this.props.setCurrentPage(p)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.state.pageSize}`).then(obj => {
+            this.props.setIsLoading(false)
             this.props.pushUsers(obj.data.items)
         })
     }
 
     render() {
         return (
-            <Users
-                followAC={this.props.followAC}
-                unFollowAC={this.props.unFollowAC}
-                state={this.props.state}
-                pageSize={this.props.state.pageSize}
-                currentPage={this.props.state.currentPage}
-                onPageChanged={this.onPageChanged}
-            />)
+            <>
+                {this.props.state.isLoading ? console.log(true) : console.log(false)}
+
+                <Users
+                    followAC={this.props.followAC}
+                    unFollowAC={this.props.unFollowAC}
+                    state={this.props.state}
+                    pageSize={this.props.state.pageSize}
+                    currentPage={this.props.state.currentPage}
+                    onPageChanged={this.onPageChanged}
+                />
+            </>)
     }
 }
 
@@ -63,6 +71,7 @@ type MDTPType = {
     pushUsers: (users: Array<UsersArrayType>) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
+    setIsLoading: (isLoading: boolean) => void
 }
 
 
@@ -88,6 +97,9 @@ let mapDispatchToProps = (dispatch: dispatchType): MDTPType => {
         },
         setTotalUsersCount: (totalUsersCount: number) =>{
             dispatch(setTotalUsersCountAC(totalUsersCount))
+        },
+        setIsLoading: (isLoading: boolean) => {
+            dispatch(setIsLoadingAC(isLoading))
         }
 
     }
