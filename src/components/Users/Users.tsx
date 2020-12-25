@@ -38,7 +38,7 @@ const Users: React.FC<UsersPropsType> = (props) => {
         {
             props.state.users.map(el => <div className={s.users} key={el.id}>
                     <div>
-                        <NavLink to={'/profile/2'}>
+                        <NavLink to={'/profile/' + el.id}>
                             <img src={el.photos.small} className={s.img}/>
                         </NavLink>
                     </div>

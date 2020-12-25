@@ -7,23 +7,31 @@ import {connect} from "react-redux";
 import {RootStateType} from "../../redux/redux-store";
 import {SetDataUserProfil, UserProfileType} from "../../redux/userProfile-reducer";
 import Preloader from "../Common/Preloader/Preloader";
+import { withRouter } from "react-router";
 
 
 type ContentContainerType = {
     state: UserProfileType
     SetDataUserProfil: (UserProfile: UserProfileType) => void
+    histort: any
+    location: any
+    match: any
+    staticContext: any
 }
 
-class ContentContainer extends React.Component<ContentContainerType>{
-
+class ContentContainer extends React.Component<any>{
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0//profile/2`).then(obj => {
+        let userID = this.props.match.params.userID
+        if(!userID){
+            userID = '2'
+        }
+        axios.get(`https://social-network.samuraijs.com/api/1.0//profile/` + userID).then(obj => {
             this.props.SetDataUserProfil(obj.data)
         })
     }
 
     render() {
-
+        debugger
         if(Object.keys(this.props.state).length === 0){
             return (<Preloader />)
         }
@@ -49,5 +57,6 @@ let mapStateToProps = (state:RootStateType): MSTPType => {
     return {state: state.userProfileState}
 }
 
+let WithUrlDataContentContainerComponent = withRouter(ContentContainer)
 
-export default connect(mapStateToProps, {SetDataUserProfil})(ContentContainer)
+export default connect(mapStateToProps, {SetDataUserProfil})(WithUrlDataContentContainerComponent)
