@@ -6,13 +6,14 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ContentContainer from "./components/Content/Content";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 const App: React.FC = () => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
-                <Header/>
+                <HeaderContainer/>
                 <Navbar/>
                 <div className='content-wrapper'>
                     <Route path='/profile/:userID?' render={() => <ContentContainer/>}/>
