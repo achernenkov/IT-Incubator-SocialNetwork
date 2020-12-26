@@ -25,11 +25,11 @@ export let setDataToAuthState = (id: number, login: string, email: string): SetD
     return {type: "SET-DATA-AUTH-STATE", payload: {id, login, email}}
 }
 
-export let authReducer = (state:AuthStateType = initialState, action: AuthActionTotalType ) => {
+export let authReducer = (state:AuthStateType = initialState, action: any ): AuthStateType => {
     switch (action.type){
         case "SET-DATA-AUTH-STATE":
             return {...action.payload}
         default:
-            return {state}
+            return state
     }
 }

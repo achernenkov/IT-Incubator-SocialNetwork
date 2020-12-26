@@ -10,6 +10,7 @@ import {
     UsersStateType
 } from "./users-reducer";
 import userProfileReducer, {SetDataUserProfileAC, UserProfileType} from './userProfile-reducer'
+import {authReducer, AuthStateType, SetDataToAuthStateType} from "./auth-reducer";
 
 // Type ----------------------------------------------------------------------------
 
@@ -18,6 +19,7 @@ export type RootStateType = {
     postState: postStateType
     usersState: UsersStateType
     userProfileState: UserProfileType
+    auth: AuthStateType
 }
 
 export type actionType = addPostDispatchType
@@ -31,6 +33,7 @@ export type actionType = addPostDispatchType
     | setTotalUsersCountACType
     | setIsLoadingACType
     | SetDataUserProfileAC
+    | SetDataToAuthStateType
 
 export type dispatchType = (action: actionType) => void
 
@@ -41,7 +44,8 @@ const reducers = combineReducers({
     dialogsState: messageReducer,
     postState: postReducer,
     usersState: usersReducer,
-    userProfileState: userProfileReducer
+    userProfileState: userProfileReducer,
+    auth: authReducer
 })
 
 let store = createStore(reducers)
