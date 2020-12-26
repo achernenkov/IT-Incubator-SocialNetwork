@@ -7,19 +7,20 @@ import {connect} from "react-redux";
 import {RootStateType} from "../../redux/redux-store";
 import {SetDataUserProfil, UserProfileType} from "../../redux/userProfile-reducer";
 import Preloader from "../Common/Preloader/Preloader";
-import { withRouter } from "react-router";
+import { withRouter, RouteComponentProps } from "react-router";
 
-
-type ContentContainerType = {
-    state: UserProfileType
-    SetDataUserProfil: (UserProfile: UserProfileType) => void
-    histort: any
-    location: any
-    match: any
-    staticContext: any
+type PathParamsType = {
+    userID: string | undefined
 }
 
-class ContentContainer extends React.Component<any>{
+type ContentContainerConnectType = {
+    state: UserProfileType
+    SetDataUserProfil: (UserProfile: UserProfileType) => void
+}
+
+type ContentContainerType = ContentContainerConnectType & RouteComponentProps<PathParamsType>
+
+class ContentContainer extends React.Component<ContentContainerType>{
     componentDidMount() {
         let userID = this.props.match.params.userID
         if(!userID){
