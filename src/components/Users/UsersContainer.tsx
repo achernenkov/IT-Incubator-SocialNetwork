@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
-import {dispatchType, RootStateType} from "../../redux/redux-store";
+import {RootStateType} from "../../redux/redux-store";
 import {
     follow,
     pushUsers,
@@ -10,7 +10,6 @@ import {
     UsersArrayType,
     UsersStateType
 } from "../../redux/users-reducer";
-import axios from "axios";
 import Preloader from "../Common/Preloader/Preloader";
 import {usersAPI} from "../../api/api";
 

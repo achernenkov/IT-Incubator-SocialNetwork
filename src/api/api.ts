@@ -15,5 +15,11 @@ export const usersAPI = {
         return instance.get('users?page=currentPage&count=pageSize').then(respons => {
             return respons.data
         })
+    },
+    auth(){
+        return instance.get('auth/me').then(response => {
+            return response.data
+        })
+
     }
 }

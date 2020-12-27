@@ -4,14 +4,15 @@ import Header from "./Header";
 import {AuthStateType, setDataToAuthState} from "../../redux/auth-reducer";
 import {RootStateType} from "../../redux/redux-store";
 import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type HeaderContainerType = MSTPType & MDTPType
 
 class HeaderContainer extends React.Component<HeaderContainerType>{
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true}).then(obj =>{
-            let {id, login, email} = obj.data.data
+        usersAPI.auth().then(data => {
+            let {id, login, email} = data.data
             this.props.setDataToAuthState(id, login, email)
         })
     }
