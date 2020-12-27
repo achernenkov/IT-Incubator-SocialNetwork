@@ -31,8 +31,6 @@ export let authReducer = (state:AuthStateType = initialState, action: AuthAction
     switch (action.type){
         case "SET-DATA-AUTH-STATE":
 
-            debugger
-
             let isAuth
 
             if(action.payload.login === undefined){

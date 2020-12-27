@@ -2,6 +2,7 @@ import React, {FormEvent} from "react";
 import {UsersStateType} from "../../redux/users-reducer";
 import s from './Users.module.css'
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersPropsType = {
     follow: (userID: number) => void
@@ -46,7 +47,26 @@ const Users: React.FC<UsersPropsType> = (props) => {
                     <div>Status: {el.status}</div>
                     <div>
                         <button
-                            onClick={() => (el.followed ? props.unFollow(el.id) : props.follow(el.id))}>{el.followed ? 'UnFollowed' : 'Followed'}</button>
+                            onClick={() => (el.followed ?
+
+                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {withCredentials: true, headers:{'API-KEY':'04c8156f-4a7c-4a31-b07c-622b1f281d6f'}}).then(
+                                    respons => {
+                                        if(respons.data.resultCode === 0){
+                                            props.unFollow(el.id)
+                                        }
+                                    }
+                                )
+
+                                : axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {},{withCredentials: true, headers:{'API-KEY':'04c8156f-4a7c-4a31-b07c-622b1f281d6f'}}).then(
+                                    respons => {
+                                        if(respons.data.resultCode === 0){
+                                            props.follow(el.id)
+                                        }
+                                    }
+                                ))
+
+
+                            }>{el.followed ? 'UnFollowed' : 'Followed'}</button>
                     </div>
 
 
