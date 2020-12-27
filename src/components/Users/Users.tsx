@@ -1,8 +1,8 @@
-import React, {FormEvent} from "react";
+import React from "react";
 import {UsersStateType} from "../../redux/users-reducer";
 import s from './Users.module.css'
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     follow: (userID: number) => void
@@ -49,22 +49,11 @@ const Users: React.FC<UsersPropsType> = (props) => {
                         <button
                             onClick={() => (el.followed ?
 
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {withCredentials: true, headers:{'API-KEY':'04c8156f-4a7c-4a31-b07c-622b1f281d6f'}}).then(
-                                    respons => {
-                                        if(respons.data.resultCode === 0){
-                                            props.unFollow(el.id)
-                                        }
-                                    }
-                                )
+                                usersAPI.unFollow(el.id).then(resultCode => {if(resultCode === 0){props.unFollow(el.id)}})
 
-                                : axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {},{withCredentials: true, headers:{'API-KEY':'04c8156f-4a7c-4a31-b07c-622b1f281d6f'}}).then(
-                                    respons => {
-                                        if(respons.data.resultCode === 0){
-                                            props.follow(el.id)
-                                        }
-                                    }
-                                ))
+                                :
 
+                                usersAPI.follow(el.id).then(resultCode => {if(resultCode === 0){props.follow(el.id)}}))
 
                             }>{el.followed ? 'UnFollowed' : 'Followed'}</button>
                     </div>
