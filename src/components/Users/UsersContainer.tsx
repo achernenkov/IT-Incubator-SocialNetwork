@@ -12,6 +12,7 @@ import {
 } from "../../redux/users-reducer";
 import axios from "axios";
 import Preloader from "../Common/Preloader/Preloader";
+import {usersAPI} from "../../api/api";
 
 
 type UsersPropsType = {
@@ -28,19 +29,21 @@ class UsersContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         this.props.setIsLoading(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.state.currentPage}&count=${this.props.state.pageSize}`, {withCredentials: true}).then(obj => {
+
+        usersAPI.getUsers(this.props.state.currentPage, this.props.state.pageSize).then(data => {
             this.props.setIsLoading(false)
-            this.props.pushUsers(obj.data.items)
-            this.props.setTotalUsersCount(obj.data.totalCount)
+            this.props.pushUsers(data.items)
+            this.props.setTotalUsersCount(data.totalCount)
         })
     }
 
     onPageChanged = (p:number) => {
         this.props.setIsLoading(true)
         this.props.setCurrentPage(p)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.state.pageSize}`, {withCredentials: true}).then(obj => {
+
+        usersAPI.getUsers(p, this.props.state.pageSize).then(data => {
             this.props.setIsLoading(false)
-            this.props.pushUsers(obj.data.items)
+            this.props.pushUsers(data.items)
         })
     }
 
