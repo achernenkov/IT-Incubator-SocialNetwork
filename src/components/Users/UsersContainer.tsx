@@ -22,7 +22,7 @@ type UsersPropsType = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
     setIsLoading: (isLoading: boolean) => void
-    setIsLoadingFollow: (isLoadingFollow:boolean) => void
+    setIsLoadingFollow: (isLoadingFollow:boolean, userID: number) => void
 }
 
 class UsersContainer extends React.Component<UsersPropsType> {
