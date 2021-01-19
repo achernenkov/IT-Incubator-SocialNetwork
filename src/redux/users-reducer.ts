@@ -16,6 +16,7 @@ export type UsersStateType = {
     totalUsersCount: number
     currentPage: number
     isLoading: boolean
+    isLoadingFollow: boolean
 }
 
 export type FollowACType = {
@@ -48,19 +49,26 @@ export type setIsLoadingACType = {
     isLoading: boolean
 }
 
+export type setIsLoadingFollowACType = {
+    type: 'SET-IS-LOADING-FOLLOW'
+    isLoadingFollow: boolean
+}
+
 type UsersACType = FollowACType
     | UnFollowACType
     | pushUsersACType
     | setCurrentPageACType
     | setTotalUsersCountACType
     | setIsLoadingACType
+    | setIsLoadingFollowACType
 
 const initialState: UsersStateType = {
     users: [],
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
-    isLoading: false
+    isLoading: false,
+    isLoadingFollow: false
 }
 
 
@@ -77,6 +85,8 @@ export const setCurrentPage = (currentPage: number): setCurrentPageACType => ({t
 export const setTotalUsersCount = (totalUsersCount: number): setTotalUsersCountACType => ({type: "TOTAL-USERS-COUNT", totalUsersCount})
 
 export const setIsLoading = (isLoading: boolean) : setIsLoadingACType => ({type: "SET-IS-LOADING", isLoading})
+
+export const setisLoadingFollow = (isLoadingFollow:boolean): setIsLoadingFollowACType => ({type: 'SET-IS-LOADING-FOLLOW', isLoadingFollow})
 
 // Reducer users
 
@@ -109,6 +119,8 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
             return {...state, totalUsersCount: action.totalUsersCount}
         case "SET-IS-LOADING":
             return {...state, isLoading: action.isLoading}
+        case "SET-IS-LOADING-FOLLOW":
+            return {...state, isLoadingFollow: action.isLoadingFollow}
         default:
             return state
     }
