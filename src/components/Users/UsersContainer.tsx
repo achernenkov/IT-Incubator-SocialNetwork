@@ -5,7 +5,7 @@ import {RootStateType} from "../../redux/redux-store";
 import {
     follow,
     pushUsers,
-    setCurrentPage, setIsLoading, setTotalUsersCount,
+    setCurrentPage, setIsLoading, setIsLoadingFollow, setTotalUsersCount,
     unFollow,
     UsersArrayType,
     UsersStateType
@@ -22,6 +22,7 @@ type UsersPropsType = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
     setIsLoading: (isLoading: boolean) => void
+    setIsLoadingFollow: (isLoadingFollow:boolean) => void
 }
 
 class UsersContainer extends React.Component<UsersPropsType> {
@@ -58,6 +59,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
                     pageSize={this.props.state.pageSize}
                     currentPage={this.props.state.currentPage}
                     onPageChanged={this.onPageChanged}
+                    setIsLoadingFollow={this.props.setIsLoadingFollow}
                 />
             </>)
     }
@@ -81,6 +83,7 @@ export default connect(mapStateToProps, {
     setCurrentPage,
     setTotalUsersCount,
     setIsLoading,
+    setIsLoadingFollow,
 })(UsersContainer)
 
 

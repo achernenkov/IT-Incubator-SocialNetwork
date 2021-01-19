@@ -86,7 +86,7 @@ export const setTotalUsersCount = (totalUsersCount: number): setTotalUsersCountA
 
 export const setIsLoading = (isLoading: boolean) : setIsLoadingACType => ({type: "SET-IS-LOADING", isLoading})
 
-export const setisLoadingFollow = (isLoadingFollow:boolean): setIsLoadingFollowACType => ({type: 'SET-IS-LOADING-FOLLOW', isLoadingFollow})
+export const setIsLoadingFollow = (isLoadingFollow:boolean): setIsLoadingFollowACType => ({type: 'SET-IS-LOADING-FOLLOW', isLoadingFollow})
 
 // Reducer users
 

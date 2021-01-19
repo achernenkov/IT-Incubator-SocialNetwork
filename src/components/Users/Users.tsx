@@ -11,6 +11,7 @@ type UsersPropsType = {
     pageSize: number
     currentPage: number
     onPageChanged: (p: number) => void
+    setIsLoadingFollow: (isLoadingFollow:boolean) => void
 }
 
 const Users: React.FC<UsersPropsType> = (props) => {
@@ -22,6 +23,21 @@ const Users: React.FC<UsersPropsType> = (props) => {
         current.push(i)
     }
 
+    const unFollowHandler = (id:number) => {
+        props.setIsLoadingFollow(true)
+        usersAPI.unFollow(id).then(resultCode => {
+            if(resultCode === 0){props.unFollow(id)}
+            props.setIsLoadingFollow(false)
+        })
+    }
+
+    const FollowHandler = (id:number) => {
+        props.setIsLoadingFollow(true)
+        usersAPI.follow(id).then(resultCode => {
+            if(resultCode === 0){props.follow(id)}
+            props.setIsLoadingFollow(false)
+        })
+    }
 
     return (<div>
 
@@ -47,15 +63,8 @@ const Users: React.FC<UsersPropsType> = (props) => {
                     <div>Status: {el.status}</div>
                     <div>
                         <button
-                            onClick={() => (el.followed ?
-
-                                usersAPI.unFollow(el.id).then(resultCode => {if(resultCode === 0){props.unFollow(el.id)}})
-
-                                :
-
-                                usersAPI.follow(el.id).then(resultCode => {if(resultCode === 0){props.follow(el.id)}}))
-
-                            }>{el.followed ? 'UnFollowed' : 'Followed'}</button>
+                            disabled={props.state.isLoadingFollow}
+                            onClick={() => (el.followed ? unFollowHandler(el.id) : FollowHandler(el.id)) }>{el.followed ? 'UnFollowed' : 'Followed'}</button>
                     </div>
 
 
