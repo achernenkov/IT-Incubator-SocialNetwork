@@ -16,7 +16,7 @@ export type UsersStateType = {
     totalUsersCount: number
     currentPage: number
     isLoading: boolean
-    isLoadingFollow: Array<number>
+    idUsersLoadingFollow: Array<number>
 }
 
 export type FollowACType = {
@@ -69,7 +69,7 @@ const initialState: UsersStateType = {
     totalUsersCount: 0,
     currentPage: 1,
     isLoading: false,
-    isLoadingFollow: []
+    idUsersLoadingFollow: []
 }
 
 
@@ -133,9 +133,9 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
             return {...state, isLoading: action.isLoading}
         case "SET-IS-LOADING-FOLLOW":
             return action.isLoadingFollow ?
-                {...state, isLoadingFollow: [...state.isLoadingFollow, action.userID]}
+                {...state, idUsersLoadingFollow: [...state.idUsersLoadingFollow, action.userID]}
                 :
-                {...state, isLoadingFollow: [...state.isLoadingFollow.filter(el => el != action.userID)]}
+                {...state, idUsersLoadingFollow: [...state.idUsersLoadingFollow.filter(el => el != action.userID)]}
         default:
             return state
     }

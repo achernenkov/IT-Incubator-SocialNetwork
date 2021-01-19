@@ -63,7 +63,7 @@ const Users: React.FC<UsersPropsType> = (props) => {
                     <div>Status: {el.status}</div>
                     <div>
                         <button
-                            disabled={props.state.isLoadingFollow.some(e => e == el.id)}
+                            disabled={props.state.idUsersLoadingFollow.some(e => e == el.id)}
                             onClick={() => (el.followed ? unFollowHandler(el.id) : FollowHandler(el.id)) }>{el.followed ? 'UnFollowed' : 'Followed'}</button>
                     </div>
 
