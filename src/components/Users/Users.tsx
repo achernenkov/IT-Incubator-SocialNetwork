@@ -2,16 +2,15 @@ import React from "react";
 import {UsersStateType} from "../../redux/users-reducer";
 import s from './Users.module.css'
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     follow: (userID: number) => void
-    state: UsersStateType
     unFollow: (userID: number) => void
+    state: UsersStateType
     pageSize: number
     currentPage: number
     onPageChanged: (p: number) => void
-    setIsLoadingFollow: (isLoadingFollow:boolean, userID: number) => void
+    setIsLoadingFollow: (isLoadingFollow: boolean, userID: number) => void
 }
 
 const Users: React.FC<UsersPropsType> = (props) => {
@@ -21,22 +20,6 @@ const Users: React.FC<UsersPropsType> = (props) => {
 
     for (let i = 1; i <= pageCount; i++) {
         current.push(i)
-    }
-
-    const unFollowHandler = (id:number) => {
-        props.setIsLoadingFollow(true, id)
-        usersAPI.unFollow(id).then(resultCode => {
-            if(resultCode === 0){props.unFollow(id)}
-            props.setIsLoadingFollow(false, id)
-        })
-    }
-
-    const FollowHandler = (id:number) => {
-        props.setIsLoadingFollow(true, id)
-        usersAPI.follow(id).then(resultCode => {
-            if(resultCode === 0){props.follow(id)}
-            props.setIsLoadingFollow(false, id)
-        })
     }
 
     return (<div>
@@ -64,7 +47,7 @@ const Users: React.FC<UsersPropsType> = (props) => {
                     <div>
                         <button
                             disabled={props.state.idUsersLoadingFollow.some(e => e == el.id)}
-                            onClick={() => (el.followed ? unFollowHandler(el.id) : FollowHandler(el.id)) }>{el.followed ? 'UnFollowed' : 'Followed'}</button>
+                            onClick={() => (el.followed ? props.unFollow(el.id) : props.follow(el.id))}>{el.followed ? 'UnFollowed' : 'Followed'}</button>
                     </div>
                 </div>
             )

@@ -78,9 +78,9 @@ const initialState: UsersStateType = {
 
 // AC
 
-export const follow = (userID: number): FollowACType => ({type: 'FOLLOW', userID: userID})
+export const followSuccess = (userID: number): FollowACType => ({type: 'FOLLOW', userID: userID})
 
-export const unFollow = (userID: number): UnFollowACType => ({type: 'UNFOLLOW', userID: userID})
+export const unFollowSuccess = (userID: number): UnFollowACType => ({type: 'UNFOLLOW', userID: userID})
 
 export const pushUsers = (users: Array<UsersArrayType>): pushUsersACType => ({type: 'SET-USERS', users})
 
@@ -154,6 +154,22 @@ export const getUsers = (currentPage:number, pageSize:number) => (dispatch: Disp
         dispatch(setIsLoading(false))
         dispatch(pushUsers(data.items))
         dispatch(setTotalUsersCount(data.totalCount))
+    })
+}
+
+export const follow = (id:number) => (dispatch: Dispatch) => {
+    dispatch(setIsLoadingFollow(true, id))
+    usersAPI.follow(id).then(resultCode => {
+        if(resultCode === 0){dispatch(followSuccess(id))}
+       dispatch(setIsLoadingFollow(false, id))
+    })
+}
+
+export const unFollow = (id:number) => (dispatch: Dispatch) => {
+   dispatch(setIsLoadingFollow(true, id))
+    usersAPI.unFollow(id).then(resultCode => {
+        if(resultCode === 0){dispatch(unFollowSuccess(id))}
+        dispatch(setIsLoadingFollow(false, id))
     })
 }
 
