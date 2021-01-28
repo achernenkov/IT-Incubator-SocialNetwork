@@ -6,6 +6,7 @@ import {dispatchType, RootStateType} from "../../redux/redux-store";
 
 type MSTPType = {
     state: dialogsStateType
+    isAuth: boolean
 }
 
 type MDTPType = {
@@ -16,7 +17,8 @@ type MDTPType = {
 
 let mapStateToProps = (state: RootStateType): MSTPType => {
     return {
-        state: state.dialogsState
+        state: state.dialogsState,
+        isAuth: state.auth.isAuth
     }
 }
 
@@ -28,7 +30,6 @@ let mapDispatchToProps = (dispatch: dispatchType): MDTPType => {
         addMessage: () => {
             dispatch(creatorActionAddMessage())
         }
-
     }
 }
 
