@@ -2,10 +2,9 @@ import React from 'react';
 import Profile from './Profile/Profile'
 import s from './Content.module.css'
 import MicroblogContainer from "./Microblog/MicroblogContainer";
-import axios from "axios";
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/redux-store";
-import {SetDataUserProfil, UserProfileType} from "../../redux/userProfile-reducer";
+import {setUsersData, UserProfileType} from "../../redux/userProfile-reducer";
 import Preloader from "../Common/Preloader/Preloader";
 import { withRouter, RouteComponentProps } from "react-router";
 
@@ -15,7 +14,7 @@ type PathParamsType = {
 
 type ContentContainerConnectType = {
     state: UserProfileType
-    SetDataUserProfil: (UserProfile: UserProfileType) => void
+    setUsersData: (userID: string) => void
 }
 
 type ContentContainerType = ContentContainerConnectType & RouteComponentProps<PathParamsType>
@@ -26,9 +25,7 @@ class ContentContainer extends React.Component<ContentContainerType>{
         if(!userID){
             userID = '2'
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0//profile/` + userID).then(obj => {
-            this.props.SetDataUserProfil(obj.data)
-        })
+        this.props.setUsersData(userID)
     }
 
     render() {
@@ -59,4 +56,4 @@ let mapStateToProps = (state:RootStateType): MSTPType => {
 
 let WithUrlDataContentContainerComponent = withRouter(ContentContainer)
 
-export default connect(mapStateToProps, {SetDataUserProfil})(WithUrlDataContentContainerComponent)
+export default connect(mapStateToProps, {setUsersData})(WithUrlDataContentContainerComponent)

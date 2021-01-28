@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+
 export type UserProfileType = {
     userId: number
     lookingForAJob: boolean
@@ -44,6 +47,16 @@ export const userProfileReducer = (state: UserProfileType | {} = initialState, a
         default:
             return state
     }
+}
+
+
+// thunk
+
+export const setUsersData = (userID:string) => (dispatch: Dispatch) => {
+    usersAPI.getUserData(userID).then(respons => {
+        dispatch(SetDataUserProfil(respons))
+    })
+
 }
 
 export default userProfileReducer;
