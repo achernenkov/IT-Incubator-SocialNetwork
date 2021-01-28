@@ -1,3 +1,6 @@
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
+
 export type UsersArrayType = {
     name: string
     id: number
@@ -139,6 +142,19 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
         default:
             return state
     }
+}
+
+
+// thunk
+
+export const getUsers = (currentPage:number, pageSize:number) => (dispatch: Dispatch) => {
+    dispatch(setIsLoading(true))
+
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(setIsLoading(false))
+        dispatch(pushUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
+    })
 }
 
 export default usersReducer

@@ -1,4 +1,4 @@
-import {createStore, combineReducers} from 'redux'
+import {createStore, combineReducers, applyMiddleware} from 'redux'
 import postReducer, {addPostDispatchType, changePostTextDispatchType, postStateType} from "./post-reducer";
 import messageReducer, {addMessageDispatchType, changeMessageDispatchType, dialogsStateType} from "./dialogs-reducer";
 import {
@@ -11,6 +11,7 @@ import {
 } from "./users-reducer";
 import userProfileReducer, {SetDataUserProfileAC, UserProfileType} from './userProfile-reducer'
 import {authReducer, AuthStateType, SetDataToAuthStateType} from "./auth-reducer";
+import thunk from "redux-thunk";
 
 // Type ----------------------------------------------------------------------------
 
@@ -48,7 +49,7 @@ const reducers = combineReducers({
     auth: authReducer
 })
 
-let store = createStore(reducers)
+let store = createStore(reducers, applyMiddleware(thunk))
 
 
 export default store;
