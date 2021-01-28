@@ -32,7 +32,6 @@ class ContentContainer extends React.Component<ContentContainerType>{
     }
 
     render() {
-        debugger
         if(Object.keys(this.props.state).length === 0){
             return (<Preloader />)
         }

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {creatorActionAddMessage, creatorActionChangeMessageText, dialogsStateType} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
