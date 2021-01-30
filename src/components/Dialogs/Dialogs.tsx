@@ -26,8 +26,6 @@ const Dialogs: React.FC<DialogsType> = (props) => {
         props.addMessage()
     }
 
-    if(!props.isAuth) return <Redirect to='login' />
-
     return (
         <section className={s.content}>
             <div className={s.dialogWrapper}>

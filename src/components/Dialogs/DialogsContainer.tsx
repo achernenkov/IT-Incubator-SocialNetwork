@@ -3,6 +3,7 @@ import {creatorActionAddMessage, creatorActionChangeMessageText, dialogsStateTyp
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {dispatchType, RootStateType} from "../../redux/redux-store";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type MSTPType = {
     state: dialogsStateType
@@ -33,6 +34,6 @@ let mapDispatchToProps = (dispatch: dispatchType): MDTPType => {
     }
 }
 
-let DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+let DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(Dialogs))
 
 export default DialogsContainer;

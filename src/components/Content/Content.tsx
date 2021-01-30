@@ -7,6 +7,7 @@ import {RootStateType} from "../../redux/redux-store";
 import {setUsersData, UserProfileType} from "../../redux/userProfile-reducer";
 import Preloader from "../Common/Preloader/Preloader";
 import { withRouter ,Redirect, RouteComponentProps } from "react-router";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type PathParamsType = {
     userID: string | undefined
@@ -30,8 +31,6 @@ class ContentContainer extends React.Component<ContentContainerType>{
     }
 
     render() {
-
-        if(!this.props.isAuth) return <Redirect to='login' />
 
         if(Object.keys(this.props.state).length === 0){
             return (<Preloader />)
@@ -62,6 +61,6 @@ let mapStateToProps = (state:RootStateType): MSTPType => {
     }
 }
 
-let WithUrlDataContentContainerComponent = withRouter(ContentContainer)
+let WithUrlDataContentContainerComponent = withRouter(withAuthRedirect(ContentContainer))
 
 export default connect(mapStateToProps, {setUsersData})(WithUrlDataContentContainerComponent)
