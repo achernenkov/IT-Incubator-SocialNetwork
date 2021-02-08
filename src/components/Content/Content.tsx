@@ -31,6 +31,16 @@ class ContentContainer extends React.Component<ContentContainerType>{
         this.props.setUsersData(userID)
     }
 
+    state = {
+        localStatusProfile: 'Мой тестовый статус' // исправить на взаимодействие с сервером.
+    }
+
+    setNewStatus(newStatus:string){
+        this.setState({
+            localStatusProfile:newStatus
+        })
+    }
+
     render() {
 
         if(Object.keys(this.props.state).length === 0){
@@ -41,6 +51,8 @@ class ContentContainer extends React.Component<ContentContainerType>{
             <section className={s.content}>
                 <Profile
                     {...this.props.state}
+                    status = {this.state.localStatusProfile}
+                    setNewStatus = {this.setNewStatus.bind(this)}
                 />
                 <MicroblogContainer/>
             </section>
