@@ -4,7 +4,7 @@ import s from './Content.module.css'
 import MicroblogContainer from "./Microblog/MicroblogContainer";
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/redux-store";
-import {setUsersData, UserProfileType} from "../../redux/userProfile-reducer";
+import {setUsersDataTC, setUserStatusTC, updateUserStatusTC, UserProfileType} from "../../redux/userProfile-reducer";
 import Preloader from "../Common/Preloader/Preloader";
 import { withRouter ,RouteComponentProps } from "react-router";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
@@ -18,6 +18,8 @@ type ContentContainerConnectType = {
     state: UserProfileType
     isAuth: boolean
     setUsersData: (userID: string) => void
+    setUserStatus: (userID: string) => void
+    updateUserStatus: (newStatus: string) => void
 }
 
 type ContentContainerType = ContentContainerConnectType & RouteComponentProps<PathParamsType>
@@ -29,16 +31,9 @@ class ContentContainer extends React.Component<ContentContainerType>{
             userID = '2'
         }
         this.props.setUsersData(userID)
-    }
-
-    state = {
-        localStatusProfile: 'Мой тестовый статус' // исправить на взаимодействие с сервером.
-    }
-
-    setNewStatus(newStatus:string){
-        this.setState({
-            localStatusProfile:newStatus
-        })
+        setTimeout(()=> this.props.setUserStatus('2'), 1000)
+        // this.props.setUserStatus(userID)
+        // this.props.updateUserStatus('Новый текст111')
     }
 
     render() {
@@ -51,8 +46,6 @@ class ContentContainer extends React.Component<ContentContainerType>{
             <section className={s.content}>
                 <Profile
                     {...this.props.state}
-                    status = {this.state.localStatusProfile}
-                    setNewStatus = {this.setNewStatus.bind(this)}
                 />
                 <MicroblogContainer/>
             </section>
@@ -75,7 +68,11 @@ let mapStateToProps = (state:RootStateType): MSTPType => {
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {setUsersData}),
+    connect(mapStateToProps, {
+        setUsersData: setUsersDataTC,
+        setUserStatus:setUserStatusTC,
+        updateUserStatus:updateUserStatusTC
+    }),
     withRouter,
     withAuthRedirect
 )(ContentContainer)

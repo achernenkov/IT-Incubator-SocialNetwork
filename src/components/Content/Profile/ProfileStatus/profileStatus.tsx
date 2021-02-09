@@ -2,17 +2,18 @@ import React from "react";
 
 type ProfileStatusPropsType = {
     status: string
-    setNewStatus:(newStatus:string) => void
 }
 
 type ProfileStatusStateType = {
     editMode: boolean
+    localStatus: string
 }
 
 class ProfileStatus extends React.Component<ProfileStatusPropsType, ProfileStatusStateType> {
 
     state = {
-        editMode: false
+        editMode: false,
+        localStatus: ''
     }
 
     activateEditMode(){
@@ -21,13 +22,18 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType, ProfileStatu
         })
     }
 
-    deactivateEditMode(event: string){
-
-        this.props.setNewStatus(event)
-
+    deactivateEditMode(){
         this.setState({
             editMode: false
         })
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<ProfileStatusStateType>) {
+        if(prevProps.status !== this.props.status){
+            this.setState({
+                localStatus: this.props.status
+            })
+        }
     }
 
     render() {
@@ -40,7 +46,7 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType, ProfileStatu
                 }
                 {this.state.editMode &&
                 <div>
-                    <input onBlur={(event) => this.deactivateEditMode('Новый текст')} autoFocus={true} value={this.props.status}/>
+                    <input onBlur={this.deactivateEditMode.bind(this)} autoFocus={true} value={this.state.localStatus}/>
                 </div>
                 }
             </div>

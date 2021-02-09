@@ -24,7 +24,6 @@ type UsersProfilePropsType = {
         large: string
     },
     status: string
-    setNewStatus:(newStatus:string) => void
 }
 
 
@@ -34,7 +33,7 @@ const Profile = (props: UsersProfilePropsType) => {
         <div>
             {/*<img src='https://wallpaperaccess.com/full/159449.jpg' className={s.imgBG}/>*/}
             <div>
-                <div><ProfileStatus status={props.status} setNewStatus={props.setNewStatus}/></div>
+                <div><ProfileStatus status={props.status}/></div>
                 <img src={props.photos.large} width='200px' height='200px'/>
                 <div>Полное имя: {props.fullName}</div>
                 <div>Поиска работы: {props.lookingForAJobDescription}</div>
