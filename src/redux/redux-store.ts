@@ -9,7 +9,7 @@ import {
     usersReducer,
     UsersStateType
 } from "./users-reducer";
-import userProfileReducer, {SetDataUserProfileAC, UserProfileType} from './userProfile-reducer'
+import userProfileReducer, {SetDataUserProfileACType, UserProfileType} from './userProfile-reducer'
 import {authReducer, AuthStateType, SetDataToAuthStateType} from "./auth-reducer";
 import thunk from "redux-thunk";
 
@@ -33,7 +33,7 @@ export type actionType = addPostDispatchType
     | setCurrentPageACType
     | setTotalUsersCountACType
     | setIsLoadingACType
-    | SetDataUserProfileAC
+    | SetDataUserProfileACType
     | SetDataToAuthStateType
 
 export type dispatchType = (action: actionType) => void

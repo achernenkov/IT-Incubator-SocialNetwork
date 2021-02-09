@@ -23,15 +23,39 @@ export type UserProfileType = {
 }
 
 
-export type SetDataUserProfileAC = {
+export type SetDataUserProfileACType = {
     type: 'SET-DATA-USER-PROFILE'
     UserProfile: UserProfileType
 }
 
+export type SetUserStatusACType = {
+    type: 'SET-USER-STATUS'
+    payload:{
+        newStatus: string
+    }
+}
 
-export type TotalUserProfileAC = SetDataUserProfileAC
 
-export const SetDataUserProfil = (UserProfile: UserProfileType): SetDataUserProfileAC => {
+export type UpdateUserStatusACType = {
+    type: 'UPDATE-USER-STATUS'
+    payload: {
+        newStatus: string
+    }
+}
+
+
+
+export type TotalUserProfileAC = SetDataUserProfileACType | SetUserStatusACType | UpdateUserStatusACType
+
+export const setUserStatusAC = (newStatus: string): SetUserStatusACType => {
+    return {type: 'SET-USER-STATUS', payload:{newStatus}}
+}
+
+export const updateUserStatusAC = (newStatus: string): UpdateUserStatusACType => {
+    return {type: 'UPDATE-USER-STATUS', payload:{newStatus}}
+}
+
+export const setDataUserProfilAC = (UserProfile: UserProfileType): SetDataUserProfileACType => {
     return {type: "SET-DATA-USER-PROFILE", UserProfile}
 }
 
@@ -44,6 +68,10 @@ export const userProfileReducer = (state: UserProfileType | {} = initialState, a
     switch (action.type) {
         case "SET-DATA-USER-PROFILE":
             return {...action.UserProfile}
+        case "SET-USER-STATUS":
+            return {state, ...action.payload}
+        case "UPDATE-USER-STATUS":
+            return {state, ...action.payload}
         default:
             return state
     }
@@ -54,9 +82,8 @@ export const userProfileReducer = (state: UserProfileType | {} = initialState, a
 
 export const setUsersData = (userID:string) => (dispatch: Dispatch) => {
     usersAPI.getUserData(userID).then(respons => {
-        dispatch(SetDataUserProfil(respons))
+        dispatch(setDataUserProfilAC(respons))
     })
-
 }
 
 export default userProfileReducer;
