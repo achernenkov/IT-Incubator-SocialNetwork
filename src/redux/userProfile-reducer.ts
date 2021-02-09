@@ -73,7 +73,7 @@ export const userProfileReducer = (state: UserProfileType | {} = initialState, a
             debugger
             return {...state, ...action.payload}
         case "UPDATE-USER-STATUS":
-            return {state, ...action.payload}
+            return {...state, ...action.payload}
         default:
             return state
     }

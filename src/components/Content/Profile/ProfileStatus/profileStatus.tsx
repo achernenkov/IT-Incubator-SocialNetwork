@@ -2,6 +2,7 @@ import React from "react";
 
 type ProfileStatusPropsType = {
     status: string
+    updateUserStatus: (newStatus: string) => void
 }
 
 type ProfileStatusStateType = {
@@ -23,8 +24,15 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType, ProfileStatu
     }
 
     deactivateEditMode(){
+        this.props.updateUserStatus(this.state.localStatus)
         this.setState({
             editMode: false
+        })
+    }
+
+    changeLocalStatusHandler(newValue: string){
+        this.setState({
+            localStatus: newValue
         })
     }
 
@@ -46,7 +54,11 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType, ProfileStatu
                 }
                 {this.state.editMode &&
                 <div>
-                    <input onBlur={this.deactivateEditMode.bind(this)} autoFocus={true} value={this.state.localStatus}/>
+                    <input
+                        onChange={(event) => {this.changeLocalStatusHandler(event.currentTarget.value)}}
+                        onBlur={this.deactivateEditMode.bind(this)}
+                        autoFocus={true}
+                        value={this.state.localStatus}/>
                 </div>
                 }
             </div>

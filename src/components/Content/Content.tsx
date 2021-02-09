@@ -28,12 +28,10 @@ class ContentContainer extends React.Component<ContentContainerType>{
     componentDidMount() {
         let userID = this.props.match.params.userID
         if(!userID){
-            userID = '2'
+            userID = '13064'
         }
         this.props.setUsersData(userID)
-        setTimeout(()=> this.props.setUserStatus('2'), 1000)
-        // this.props.setUserStatus(userID)
-        // this.props.updateUserStatus('Новый текст111')
+        setTimeout(()=> this.props.setUserStatus('13064'), 10)
     }
 
     render() {
@@ -46,6 +44,7 @@ class ContentContainer extends React.Component<ContentContainerType>{
             <section className={s.content}>
                 <Profile
                     {...this.props.state}
+                    updateUserStatus = {this.props.updateUserStatus}
                 />
                 <MicroblogContainer/>
             </section>
