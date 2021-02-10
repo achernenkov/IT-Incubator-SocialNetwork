@@ -12,6 +12,7 @@ import {
 import userProfileReducer, {SetDataUserProfileACType, UserProfileType} from './userProfile-reducer'
 import {authReducer, AuthStateType, SetDataToAuthStateType} from "./auth-reducer";
 import thunk from "redux-thunk";
+import { reducer as formReducer } from 'redux-form'
 
 // Type ----------------------------------------------------------------------------
 
@@ -46,7 +47,8 @@ const reducers = combineReducers({
     postState: postReducer,
     usersState: usersReducer,
     userProfileState: userProfileReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 let store = createStore(reducers, applyMiddleware(thunk))
