@@ -1,5 +1,5 @@
-import {addPostDispatchType, changePostTextDispatchType} from "./post-reducer"
-import {addMessageDispatchType, changeMessageDispatchType} from "./dialogs-reducer";
+import {addPostDispatchType} from "./post-reducer"
+import {addMessageDispatchType} from "./dialogs-reducer";
 
 type dialogMessageType = {
     id: number
@@ -37,9 +37,9 @@ export type stateType = {
 
 export type actionType =
     addPostDispatchType
-    | changePostTextDispatchType
+    // | changePostTextDispatchType
     | addMessageDispatchType
-    | changeMessageDispatchType
+    // | changeMessageDispatchType
 
 export type storeType = {
     dialogsState: dialogsStateType

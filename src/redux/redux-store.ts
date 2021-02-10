@@ -1,6 +1,6 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
-import postReducer, {addPostDispatchType, changePostTextDispatchType, postStateType} from "./post-reducer";
-import messageReducer, {addMessageDispatchType, changeMessageDispatchType, dialogsStateType} from "./dialogs-reducer";
+import postReducer, {addPostDispatchType, postStateType} from "./post-reducer";
+import messageReducer, {addMessageDispatchType, dialogsStateType} from "./dialogs-reducer";
 import {
     FollowACType,
     pushUsersACType,
@@ -25,9 +25,7 @@ export type RootStateType = {
 }
 
 export type actionType = addPostDispatchType
-    | changePostTextDispatchType
     | addMessageDispatchType
-    | changeMessageDispatchType
     | FollowACType
     | UnFollowACType
     | pushUsersACType
