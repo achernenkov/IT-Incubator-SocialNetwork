@@ -1,6 +1,6 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
-import {FormElement, FormElementInput} from "../FormElemnt/FormElement";
+import {FormElementInput, FormElementTextArea} from "../FormElemnt/FormElement";
 import {maxLenghtCreator, required} from "../../../utils/validators/validators";
 
 type FormDataType = {
@@ -17,13 +17,13 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
             <div><Field
                 name='login'
                 placeholder={'login'}
-                component={FormElement}
+                component={FormElementTextArea}
                 validate={[required, maxLength10]}
             /></div>
             <div><Field
                 name='password'
                 placeholder={'password'}
-                component={FormElement}
+                component={FormElementTextArea}
                 validate={[required, maxLength10]}
             /></div>
             <div><Field

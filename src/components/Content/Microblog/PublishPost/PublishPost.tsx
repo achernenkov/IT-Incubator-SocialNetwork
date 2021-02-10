@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
-import {FormElement} from "../../../Common/FormElemnt/FormElement";
+import {FormElementTextArea} from "../../../Common/FormElemnt/FormElement";
 import {maxLenghtCreator, required} from "../../../../utils/validators/validators";
 
 
@@ -19,7 +19,7 @@ const AddPostForm = (props: InjectedFormProps<PostFormDataType>) => {
         <form onSubmit={props.handleSubmit}>
             <div><Field
                 name='postFormText'
-                component={FormElement}
+                component={FormElementTextArea}
                 placeholder='Enter text'
                 validate={[required, maxLength30]}
             /></div>

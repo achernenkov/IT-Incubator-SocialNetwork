@@ -5,7 +5,7 @@ import MessageDialog from "./MessageDialog";
 import {dialogsStateType} from './../../redux/state'
 import {Field, Form, InjectedFormProps, reduxForm} from 'redux-form'
 import {maxLenghtCreator, required} from "../../utils/validators/validators";
-import {FormElement} from "../Common/FormElemnt/FormElement";
+import {FormElementTextArea} from "../Common/FormElemnt/FormElement";
 
 type DialogsType = {
     state: dialogsStateType
@@ -22,7 +22,7 @@ const maxLength15 = maxLenghtCreator(15)
 const MessageTextForm = (props: InjectedFormProps<MessageFormDataType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div><Field component={FormElement}
+            <div><Field component={FormElementTextArea}
                         placeholder='Enter you message'
                         name='messageText'
                         validate={[required, maxLength15]}
