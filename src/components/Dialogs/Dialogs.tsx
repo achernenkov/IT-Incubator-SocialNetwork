@@ -17,7 +17,7 @@ export type MessageFormDataType = {
     messageText: string
 }
 
-const maxLenght15 = maxLenghtCreator(15)
+const maxLength15 = maxLenghtCreator(15)
 
 const MessageTextForm = (props: InjectedFormProps<MessageFormDataType>) => {
     return (
@@ -25,7 +25,7 @@ const MessageTextForm = (props: InjectedFormProps<MessageFormDataType>) => {
             <div><Field component={FormElement}
                         placeholder='Enter you message'
                         name='messageText'
-                        validate={[required, maxLenght15]}
+                        validate={[required, maxLength15]}
             /></div>
             <button>Send Message</button>
         </form>
