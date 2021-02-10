@@ -13,29 +13,22 @@ export type dialogsUsersType = {
 export type dialogsStateType = {
     dialogsUsers: Array<dialogsUsersType>
     dialogMessage: Array<dialogMessageType>
-    messageText: string
 }
 
 export type addMessageDispatchType = {
     type: 'ADD-MESSAGE'
+    payload:{
+        newMessageText: string
+    }
 }
 
-export type changeMessageDispatchType = {
-    type: 'CHANGE-MESSAGE-TEXT'
-    text: string
-}
-
-export type actionsMessageType = addMessageDispatchType | changeMessageDispatchType
+export type actionsMessageType = addMessageDispatchType
 
 
 //
 // Message AC
 
-export const creatorActionAddMessage = (): addMessageDispatchType => ({type: 'ADD-MESSAGE'})
-export const creatorActionChangeMessageText = (messageText: string): changeMessageDispatchType => ({
-    type: 'CHANGE-MESSAGE-TEXT',
-    text: messageText
-})
+export const AddMessageAC = (newMessageText: string): addMessageDispatchType => ({type: 'ADD-MESSAGE', payload:{newMessageText}})
 
 //
 //InitialState
@@ -52,8 +45,7 @@ const initialState = {
     dialogMessage: [
         {id: 1, text: 'Hello!'},
         {id: 2, text: 'How are you?'}
-    ],
-    messageText: ''
+    ]
 }
 
 
@@ -65,11 +57,8 @@ const messageReducer = (state: dialogsStateType = initialState, action: actionsM
         case "ADD-MESSAGE":
             return {
                 ...state,
-                dialogMessage: [...state.dialogMessage, {id: 3, text: state.messageText}],
-                messageText: ''
+                dialogMessage: [...state.dialogMessage, {id: 3, text: action.payload.newMessageText}],
             }
-        case "CHANGE-MESSAGE-TEXT":
-            return {...state, messageText: action.text}
         default:
             return state
     }

@@ -3,27 +3,35 @@ import s from './Dialogs.module.css'
 import UsersDialogs from "./UsersDialogs";
 import MessageDialog from "./MessageDialog";
 import {dialogsStateType} from './../../redux/state'
-import {Redirect} from "react-router";
+import {Field, Form, InjectedFormProps, reduxForm} from 'redux-form'
 
 type DialogsType = {
     state: dialogsStateType
-    addMessage: () => void
-    changeMessageText: (value: string) => void
-    isAuth:boolean
+    addMessage: (newMessageText: string) => void
+    isAuth: boolean
 }
+
+type MessageFormDataType = {
+    messageText: string
+}
+
+
+const MessageTextForm = (props: InjectedFormProps<MessageFormDataType>) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div><Field component='textarea' placeholder='Enter you message' name='messageText'/></div>
+            <button>Send Message</button>
+        </form>
+    )
+}
+
+const MessageTextFormRedux = reduxForm<MessageFormDataType>({form: 'addMessageForm'})(MessageTextForm)
 
 const Dialogs: React.FC<DialogsType> = (props) => {
 
-    let newPostValue = React.createRef<HTMLTextAreaElement>()
 
-    const changeMessageText = () => {
-        if (newPostValue.current) {
-            props.changeMessageText(newPostValue.current.value)
-        }
-    }
-
-    const addMessage = () => {
-        props.addMessage()
+    const addMessage = (data: MessageFormDataType) => {
+        props.addMessage(data.messageText)
     }
 
     return (
@@ -43,9 +51,7 @@ const Dialogs: React.FC<DialogsType> = (props) => {
                         )
                     }
 
-                    <textarea ref={newPostValue} onChange={changeMessageText} value={props.state.messageText}/>
-                    <br/>
-                    <button onClick={addMessage}>Отправить сообщение</button>
+                    <MessageTextFormRedux onSubmit={addMessage}/>
                 </div>
             </div>
         </section>

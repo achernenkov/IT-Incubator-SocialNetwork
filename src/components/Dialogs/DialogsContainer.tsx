@@ -1,5 +1,5 @@
 import React from 'react';
-import {creatorActionAddMessage, creatorActionChangeMessageText, dialogsStateType} from "../../redux/dialogs-reducer";
+import {AddMessageAC,dialogsStateType} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {dispatchType, RootStateType} from "../../redux/redux-store";
@@ -12,8 +12,7 @@ type MSTPType = {
 }
 
 type MDTPType = {
-    changeMessageText: (value: string) => void
-    addMessage: () => void
+    addMessage: (newMessageText: string) => void
 }
 
 
@@ -26,11 +25,8 @@ let mapStateToProps = (state: RootStateType): MSTPType => {
 
 let mapDispatchToProps = (dispatch: dispatchType): MDTPType => {
     return {
-        changeMessageText: (value: string) => {
-            dispatch(creatorActionChangeMessageText(value))
-        },
-        addMessage: () => {
-            dispatch(creatorActionAddMessage())
+        addMessage: (newMessageText: string) => {
+            dispatch(AddMessageAC(newMessageText))
         }
     }
 }
