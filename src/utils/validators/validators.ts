@@ -1,7 +1,7 @@
 
 
 export const required = (value: string) => {
-    return value.length ? undefined : 'This field is required'
+    return value ? undefined : 'This field is required'
 }
 
 

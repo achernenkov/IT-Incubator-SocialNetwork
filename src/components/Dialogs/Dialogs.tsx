@@ -4,6 +4,8 @@ import UsersDialogs from "./UsersDialogs";
 import MessageDialog from "./MessageDialog";
 import {dialogsStateType} from './../../redux/state'
 import {Field, Form, InjectedFormProps, reduxForm} from 'redux-form'
+import {maxLenghtCreator, required} from "../../utils/validators/validators";
+import {FormElement} from "../Common/FormElemnt/FormElement";
 
 type DialogsType = {
     state: dialogsStateType
@@ -11,15 +13,20 @@ type DialogsType = {
     isAuth: boolean
 }
 
-type MessageFormDataType = {
+export type MessageFormDataType = {
     messageText: string
 }
 
+const maxLenght15 = maxLenghtCreator(15)
 
 const MessageTextForm = (props: InjectedFormProps<MessageFormDataType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div><Field component='textarea' placeholder='Enter you message' name='messageText'/></div>
+            <div><Field component={FormElement}
+                        placeholder='Enter you message'
+                        name='messageText'
+                        validate={[required, maxLenght15]}
+            /></div>
             <button>Send Message</button>
         </form>
     )
