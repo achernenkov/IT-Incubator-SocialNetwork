@@ -31,7 +31,7 @@ class ContentContainer extends React.Component<ContentContainerType>{
             userID = '13064'
         }
         this.props.setUsersData(userID)
-        setTimeout(()=> this.props.setUserStatus('13064'), 10)
+        setTimeout(()=> this.props.setUserStatus('13064'), 1000)
     }
 
     render() {

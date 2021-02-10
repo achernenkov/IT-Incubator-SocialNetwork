@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import Microblog from "./Microblog";
-import {creatorActionAddPost, creatorActionChangePostText, postStateType} from "../../../redux/post-reducer";
+import {AddPostAC,postStateType} from "../../../redux/post-reducer";
 import {connect} from "react-redux";
 import {dispatchType, RootStateType} from "../../../redux/redux-store";
 
@@ -10,8 +10,7 @@ type MSTPType = {
 }
 
 type MDTPType = {
-    changeTextPublishPost: (value: string) => void
-    addPost: () => void
+    addPost: (newPostText: string) => void
 }
 
 let mapStateToProps = (state: RootStateType): MSTPType => {
@@ -22,11 +21,8 @@ let mapStateToProps = (state: RootStateType): MSTPType => {
 
 let mapDispatchToProps = (dispatch: dispatchType): MDTPType => {
     return {
-        changeTextPublishPost: (value: string) => {
-            dispatch(creatorActionChangePostText(value))
-        },
-        addPost: () => {
-            dispatch(creatorActionAddPost())
+        addPost: (newPostText: string) => {
+            dispatch(AddPostAC(newPostText))
         }
 
     }

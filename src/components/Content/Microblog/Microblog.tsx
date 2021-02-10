@@ -1,13 +1,11 @@
 import React, {FC} from 'react';
 import PublishPost from './PublishPost/PublishPost'
 import Post from './Post/Post'
-import {actionType} from './../../../redux/state'
 import {postStateType} from "../../../redux/post-reducer";
 
 type microblogType = {
     state: postStateType
-    addPost: () => void
-    changeTextPublishPost: (value: string) => void
+    addPost: (newPostText: string) => void
 }
 
 const Microblog: React.FC<microblogType> = (props) => {
@@ -15,9 +13,7 @@ const Microblog: React.FC<microblogType> = (props) => {
         <div>
             My Post
             <PublishPost
-                textValue={props.state.postText}
                 addPost={props.addPost}
-                changeTextPublishPost={props.changeTextPublishPost}
             />
             <div>
                 Посты
