@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from "react-redux";
 import Header from "./Header";
-import {AuthStateType, getAuthUserData} from "../../redux/auth-reducer";
+import {AuthStateType, getAuthUserDataTC} from "../../redux/auth-reducer";
 import {RootStateType} from "../../redux/redux-store";
 
 type HeaderContainerType = MSTPType & MDTPType
@@ -32,4 +32,4 @@ let mapStateToProps = (state: RootStateType): MSTPType => {
 }
 
 
-export default connect(mapStateToProps,{getAuthUserData})(HeaderContainer)
+export default connect(mapStateToProps,{getAuthUserData: getAuthUserDataTC})(HeaderContainer)
