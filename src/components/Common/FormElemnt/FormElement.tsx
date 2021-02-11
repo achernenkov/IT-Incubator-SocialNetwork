@@ -1,7 +1,9 @@
-import React from "react";
+import React, {InputHTMLAttributes} from "react";
+import {WrappedFieldProps} from "redux-form/lib/Field";
 import style from './FormElement.module.css'
 
-export const FormElementCreator = (Element:string) => ({input, meta, ...props}: any) => {
+
+export const FormElementCreator = (Element:string) => ({input, meta, ...props}: WrappedFieldProps & InputHTMLAttributes<HTMLInputElement>) => {
 
     const hasError = meta.touched && meta.error
 
