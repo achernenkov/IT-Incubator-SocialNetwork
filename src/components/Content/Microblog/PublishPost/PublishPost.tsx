@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 import {FormElementTextArea} from "../../../Common/FormElemnt/FormElement";
 import {maxLenghtCreator, required} from "../../../../utils/validators/validators";
+import {authAPI} from "../../../../api/api";
 
 
 type publishPostType = {
