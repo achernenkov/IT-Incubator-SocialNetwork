@@ -2,6 +2,8 @@ import React from "react";
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 import {FormElementInput, FormElementTextArea} from "../FormElemnt/FormElement";
 import {maxLenghtCreator, required} from "../../../utils/validators/validators";
+import {connect} from "react-redux";
+import {logInUserTC} from "../../../redux/auth-reducer";
 
 type FormDataType = {
     login: string
@@ -9,7 +11,11 @@ type FormDataType = {
     rememberMe: boolean
 }
 
-const maxLength10 = maxLenghtCreator(10)
+type LoginPropsType = {
+    login: (login: string, pass: string, remember: boolean) => void
+}
+
+const maxLength50 = maxLenghtCreator(50)
 
 const LoginForm = (props: InjectedFormProps<FormDataType>) => {
     return (
@@ -18,13 +24,13 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
                 name='login'
                 placeholder={'login'}
                 component={FormElementTextArea}
-                validate={[required, maxLength10]}
+                validate={[required, maxLength50]}
             /></div>
             <div><Field
                 name='password'
                 placeholder={'password'}
                 component={FormElementTextArea}
-                validate={[required, maxLength10]}
+                validate={[required, maxLength50]}
             /></div>
             <div><Field
                 name='rememberMe'
@@ -47,10 +53,10 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
 
 const LoginFormRedux = reduxForm<FormDataType>({form: 'LoginForm'})(LoginForm)
 
-const Login = () => {
+const Login = (props: LoginPropsType) => {
 
     const submitTest = (data: FormDataType) => {
-        console.log(data)
+        props.login(data.login, data.password, data.rememberMe)
     }
 
     return (
@@ -60,4 +66,4 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default connect(null, {login:logInUserTC})(Login);
